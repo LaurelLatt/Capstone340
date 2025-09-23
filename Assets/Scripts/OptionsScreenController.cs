@@ -1,9 +1,8 @@
 using UnityEngine;
 
-public class PauseScreenController : MonoBehaviour
+public class OptionsScreenController : MonoBehaviour
 {
     public UIScreenManager uiScreenManager;
-    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -16,19 +15,13 @@ public class PauseScreenController : MonoBehaviour
         
     }
     
-    public void GoToOptionsMenu()
+    public void Exit()
     {
-        uiScreenManager.ShowOptionsScreen();
-    }
-
-    public void ResumeGame()
-    {
-        uiScreenManager.HidePauseScreen();
+        uiScreenManager.HideOptionsScreen();
     }
 
     public void GoToSelectScreen()
     {
         uiScreenManager.ShowSelectScreen();
     }
-    
 }

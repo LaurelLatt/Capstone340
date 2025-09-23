@@ -15,4 +15,9 @@ public class SelectScreenController : MonoBehaviour
         // Later: store this index in a GameManager or LevelManager
         uiScreenManager.ShowGameScreen();
     }
+
+    public void GoToOptionsMenu()
+    {
+        uiScreenManager.ShowOptionsScreen();
+    }
 }
