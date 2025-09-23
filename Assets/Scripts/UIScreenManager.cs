@@ -76,7 +76,7 @@ public class UIScreenManager : MonoBehaviour
 
     private void HideAllScreens()
     {
-        startScreen.SetActive(true);
+        startScreen.SetActive(false);
         selectScreen.SetActive(false);
         gameScreen.SetActive(false);
         resultsScreen.SetActive(false);

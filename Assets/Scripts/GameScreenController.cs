@@ -19,4 +19,9 @@ public class GameScreenController : MonoBehaviour
     {
         uiScreenManager.ShowPauseScreen();
     }
+
+    public void GoToResults()
+    {
+        uiScreenManager.ShowResultsScreen();
+    }
 }
