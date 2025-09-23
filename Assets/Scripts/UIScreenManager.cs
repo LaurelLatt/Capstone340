@@ -6,15 +6,13 @@ public class UIScreenManager : MonoBehaviour
     public GameObject selectScreen;
     public GameObject gameScreen;
     public GameObject resultsScreen;
+    public GameObject pauseScreen;
     private GameObject activeScreen;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        startScreen.SetActive(true);
-        selectScreen.SetActive(false);
-        gameScreen.SetActive(false);
-        resultsScreen.SetActive(false);
-        activeScreen = startScreen;
+        HideAllScreens();
+        ShowStartScreen();
     }
 
     // Update is called once per frame
@@ -43,6 +41,16 @@ public class UIScreenManager : MonoBehaviour
         ShowScreen(resultsScreen);
     }
 
+    public void ShowPauseScreen()
+    {
+        pauseScreen.SetActive(true);
+    }
+
+    public void HidePauseScreen()
+    {
+        pauseScreen.SetActive(false);
+    }
+
     private void ShowScreen(GameObject screenToShow)
     {
         screenToShow.SetActive(true);
@@ -53,5 +61,14 @@ public class UIScreenManager : MonoBehaviour
         screenToShow.SetActive(true);
         activeScreen = screenToShow;
         
+    }
+
+    private void HideAllScreens()
+    {
+        startScreen.SetActive(true);
+        selectScreen.SetActive(false);
+        gameScreen.SetActive(false);
+        resultsScreen.SetActive(false);
+        pauseScreen.SetActive(false);
     }
 }
