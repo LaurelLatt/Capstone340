@@ -9,12 +9,6 @@ public class StartScreenController : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void OnStartButtonClicked()
     {
         uiScreenManager.ShowSelectScreen();
