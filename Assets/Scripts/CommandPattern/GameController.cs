@@ -61,10 +61,10 @@ namespace CommandPattern
             //If we were moving with speed * Time.deltaTime, the undo system would be more comlicated to implement.
             //When we undo, the Time.deltaTime may be different so we end up at another position than we previously had
             //You could solve this by saving the Time.deltaTime somewhere
-            // if (Input.GetKey(KeyCode.W))
-            // {
-            //     ExecuteNewCommand(buttonW);
-            // }
+            if (Input.GetKey(KeyCode.W))
+            {
+                ExecuteNewCommand(buttonW);
+            }
             if (Input.GetKey(KeyCode.A))
             {
                 ExecuteNewCommand(buttonA);

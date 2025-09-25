@@ -8,7 +8,7 @@ namespace CommandPattern
     public class MoveObject : MonoBehaviour
     {
         //Speed of the object
-        private const float MOVE_STEP_DISTANCE = 0.02f;
+        private const float MOVE_STEP_DISTANCE = 0.2f;
 
 
         //These methods will be executed by their own command
