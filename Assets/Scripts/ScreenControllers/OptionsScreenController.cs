@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 
 namespace ScreenControllers
@@ -26,6 +27,16 @@ namespace ScreenControllers
         public void GoToSelectScreen()
         {
             uiScreenManager.ShowSelectScreen();
+        }
+
+        public void QuitGame()
+        {
+            #if UNITY_EDITOR
+                EditorApplication.isPlaying = false;
+            #else
+                Application.Quit(); // For standalone builds
+            #endif
+            
         }
     }
 }

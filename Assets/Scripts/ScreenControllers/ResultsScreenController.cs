@@ -6,6 +6,7 @@ namespace ScreenControllers
     public class ResultsScreenController : MonoBehaviour
     {
         public UIScreenManager uiScreenManager;
+        public GameManager gameManager;
 
         public Text resultsText;
 
@@ -24,12 +25,13 @@ namespace ScreenControllers
         public void DisplayResults()
         {
             resultsText.text = "You won!";
-
+        
         }
 
         public void RetryLevel()
         {
             uiScreenManager.ShowGameScreen();
+            gameManager.LevelReset();
         }
 
         public void GoToSelectScreen()

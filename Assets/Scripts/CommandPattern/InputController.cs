@@ -6,7 +6,7 @@ namespace CommandPattern
 {
     //Command pattern rebind keys example from the book "Game Programming Patterns"
     //Is also including undo, redo, and replay system
-    public class GameController : MonoBehaviour
+    public class InputController : MonoBehaviour
     {
         public MoveObject objectThatMoves;
         
@@ -114,11 +114,11 @@ namespace CommandPattern
 
 
             //Rebind keys by just swapping A and D buttons
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                //ref is important or the keys will not be swapped
-                SwapKeys(ref buttonA, ref buttonD);
-            }
+            // if (Input.GetKeyDown(KeyCode.Space))
+            // {
+            //     //ref is important or the keys will not be swapped
+            //     SwapKeys(ref buttonA, ref buttonD);
+            // }
 
 
             //Start replay
