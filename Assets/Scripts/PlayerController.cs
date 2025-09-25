@@ -13,12 +13,20 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        CheckForFalling();
     }
 
     public void ResetPosition()
     {
         transform.position = startPosition;
+    }
+
+    private void CheckForFalling()
+    {
+        if (transform.position.y < -30)
+        {
+            ResetPosition();
+        }
     }
     
 }
