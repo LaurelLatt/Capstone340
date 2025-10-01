@@ -10,15 +10,27 @@ public class CameraFollow2D : MonoBehaviour
     [Range(0f, 10f)]
     public float smoothSpeed = 5f;
 
+    [Tooltip("Y-offset so the player isn't centered on the screen. Positive for higher camera.")]
+    public float yOffset = 2;
+    
     [Tooltip("Z-offset so the camera stays back (usually negative).")]
     public float zOffset = -10f;
+    
+    [Tooltip("Top and bottom position of the camera.")]
+    public float minY = -10f;
+    public float maxY = 10f;
 
     private void LateUpdate()
     {
         if (target == null) return;
+        
+        float targetY = target.position.y + yOffset;
+        
+        // Clamp the Y position so camera doesn't go above maxY or below minY
+        targetY = Mathf.Clamp(targetY, minY, maxY);
 
         // Desired camera position: follow target in X/Y, keep fixed Z
-        Vector3 desired = new Vector3(target.position.x, target.position.y, zOffset);
+        Vector3 desired = new Vector3(target.position.x, targetY, zOffset);
 
         if (smoothSpeed <= 0f)
         {

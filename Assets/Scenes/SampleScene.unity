@@ -1571,7 +1571,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 4
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1660,7 +1660,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow2D
   target: {fileID: 238826918}
   smoothSpeed: 5
+  yOffset: 2
   zOffset: -10
+  minY: -10
+  maxY: -3
 --- !u!1 &359458766
 GameObject:
   m_ObjectHideFlags: 0
@@ -2486,7 +2489,7 @@ Transform:
   m_GameObject: {fileID: 651739567}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 20, z: 0}
+  m_LocalPosition: {x: 0, y: 0.4, z: 0}
   m_LocalScale: {x: 35, y: 0.28926, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2933,7 +2936,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 543045a9c9e354627abdcfdf37cc5291, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MushroomBounce
-  bounceForce: 50
+  bounceForce: 25
 --- !u!70 &1038380310
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -3038,9 +3041,9 @@ Transform:
   m_GameObject: {fileID: 1038380308}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15, y: -8.85, z: -0.2}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 0.12}
-  m_ConstrainProportionsScale: 1
+  m_LocalPosition: {x: 15, y: -7.22, z: -0.2}
+  m_LocalScale: {x: 0.25, y: 0.2, z: 0.12}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3177,6 +3180,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1039099667}
   m_CullTransparentMesh: 1
+--- !u!1 &1071825668 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 150927765174101916, guid: a7eab7ccb1b414b489eb9bcc7a4a55d6, type: 3}
+  m_PrefabInstance: {fileID: 1469355042}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1071825673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1071825668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 851bce5fc7dde4010a72c12a1acd98c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::SimpleAnimator
+  standingSprite: {fileID: 21300000, guid: 0af50d3fc3d6b48e4a0f30ee83bccad8, type: 3}
+  movingSprite: {fileID: 21300000, guid: 220bcf4c83e634bfaaa986e2b887badc, type: 3}
 --- !u!1 &1260400165
 GameObject:
   m_ObjectHideFlags: 0
@@ -3863,7 +3885,7 @@ PrefabInstance:
     - target: {fileID: 3884734869397526062, guid: a7eab7ccb1b414b489eb9bcc7a4a55d6, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 7458ad3fad6314c2d8bec48bab92e023, type: 3}
+      objectReference: {fileID: 21300000, guid: 0af50d3fc3d6b48e4a0f30ee83bccad8, type: 3}
     - target: {fileID: 3884734869397526062, guid: a7eab7ccb1b414b489eb9bcc7a4a55d6, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
@@ -3878,7 +3900,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4350506631375414869, guid: a7eab7ccb1b414b489eb9bcc7a4a55d6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -10
+      value: -9.5
       objectReference: {fileID: 0}
     - target: {fileID: 4350506631375414869, guid: a7eab7ccb1b414b489eb9bcc7a4a55d6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3916,6 +3938,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.54
       objectReference: {fileID: 0}
+    - target: {fileID: 7276706453744137074, guid: a7eab7ccb1b414b489eb9bcc7a4a55d6, type: 3}
+      propertyPath: _jumpSettings.JumpHeight
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 7580666695933235646, guid: a7eab7ccb1b414b489eb9bcc7a4a55d6, type: 3}
       propertyPath: InputManager
       value: 
@@ -3927,6 +3953,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 156159312054672884, guid: a7eab7ccb1b414b489eb9bcc7a4a55d6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 238826919}
+    - targetCorrespondingSourceObject: {fileID: 150927765174101916, guid: a7eab7ccb1b414b489eb9bcc7a4a55d6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1071825673}
   m_SourcePrefab: {fileID: 100100000, guid: a7eab7ccb1b414b489eb9bcc7a4a55d6, type: 3}
 --- !u!1 &1478979874
 GameObject:
@@ -4283,7 +4312,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d578cb4af101344b0abb919219663dac, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9811fab45950f4582829479c742094bd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4304,7 +4333,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.14, y: 0.27, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
