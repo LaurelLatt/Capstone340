@@ -46,8 +46,9 @@ GameObject:
   - component: {fileID: 934385786118580499}
   - component: {fileID: 8805631690557120493}
   - component: {fileID: 8828335828492369883}
-  - component: {fileID: 3632170085447849445}
-  - component: {fileID: 311992840843970147}
+  - component: {fileID: 4879200830425482844}
+  - component: {fileID: 2440254157891054748}
+  - component: {fileID: 8977044179730164221}
   m_Layer: 0
   m_Name: LEGO Fairy Batman Standing
   m_TagString: Untagged
@@ -126,7 +127,7 @@ SpriteRenderer:
   m_Size: {x: 1.28, y: 1.28}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!50 &934385786118580499
@@ -145,7 +146,7 @@ Rigidbody2D:
   m_LinearDamping: 0
   m_AngularDamping: 0
   m_GravityScale: 0
-  m_Material: {fileID: 6200000, guid: 69946690334fb4e0d965422a0a916968, type: 2}
+  m_Material: {fileID: 6200000, guid: 211b4308abad84384b04cf024c578298, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -217,7 +218,7 @@ MonoBehaviour:
   MoveStats: {fileID: 11400000, guid: f44613b9ae0d042c38e8f8c34a0ec8c2, type: 2}
   _feetColl: {fileID: 3945666554408700734}
   _bodyColl: {fileID: 6154573096377528263}
---- !u!114 &3632170085447849445
+--- !u!114 &4879200830425482844
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -226,12 +227,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 3395313970545248676}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bfd8ee60a0354ae2868df2300c7ca39, type: 3}
+  m_Script: {fileID: 11500000, guid: adaf4e00e557a4e57a43d8b8ca0b7352, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SimpleAnimator
-  standingSprite: {fileID: 21300000, guid: ea269757c103d425da77bb90300ca87f, type: 3}
-  movingSprite: {fileID: 21300000, guid: 7580fee0025e04f6c953269f5daea93f, type: 3}
---- !u!114 &311992840843970147
+  standingSprite: {fileID: 21300000, guid: 0af50d3fc3d6b48e4a0f30ee83bccad8, type: 3}
+  movingSprite: {fileID: 21300000, guid: 220bcf4c83e634bfaaa986e2b887badc, type: 3}
+--- !u!114 &2440254157891054748
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -240,10 +241,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 3395313970545248676}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab6e71e01ad8e4de08bd3641c09c8574, type: 3}
+  m_Script: {fileID: 11500000, guid: 3947621e1a300460c86c653c6ad7355e, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HeightBasedGravityInverter
-  flipHeight: 5
+  m_EditorClassIdentifier: Assembly-CSharp::GravityInverters.HeightBasedGravityInverter
+  flipHeight: 0
+  flipBuffer: 0.5
+--- !u!114 &8977044179730164221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3395313970545248676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3da2163857f7b451abce298e307541ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
 --- !u!1 &6150082716194581031
 GameObject:
   m_ObjectHideFlags: 0

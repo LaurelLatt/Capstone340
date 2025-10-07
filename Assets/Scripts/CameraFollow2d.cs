@@ -19,7 +19,7 @@ public class CameraFollow2D : MonoBehaviour
     [Tooltip("Top and bottom position of the camera.")]
     public float minY = -10f;
     public float maxY = 10f;
-
+    
     private void LateUpdate()
     {
         if (target == null) return;
@@ -51,4 +51,5 @@ public class CameraFollow2D : MonoBehaviour
     {
         target = newTarget;
     }
+    
 }

@@ -3,16 +3,16 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public PlayerController player;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public static GameManager Instance { get; private set; }
+    private void Awake()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     public void LevelReset()
@@ -23,5 +23,15 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         player.ResetPosition();
+    }
+
+    public void OnLevelLoaded(GameObject currentLevel)
+    {
+        LevelData levelData = currentLevel.GetComponent<LevelData>();
+        if (levelData != null)
+        {
+            player.transform.position = levelData.playerSpawn.position;
+        }
+        
     }
 }
