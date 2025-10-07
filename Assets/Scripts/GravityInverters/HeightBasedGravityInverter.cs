@@ -7,6 +7,7 @@ namespace GravityInverters
     {
         [Tooltip("The Y position at which gravity flips.")]
         public float flipHeight = 0f;
+        [SerializeField] private float flipBuffer = 0.5f; // prevents repeated flipping
 
         private bool isInverted = false;
         private PlayerMovement movement;
@@ -22,12 +23,12 @@ namespace GravityInverters
         {
             if (movement == null) return;
 
-            if (transform.position.y > flipHeight && !isInverted)
+            if (transform.position.y > flipHeight + flipBuffer && !isInverted)
             {
                 movement.FlipGravity();
                 isInverted = true;
             }
-            else if (transform.position.y <= flipHeight && isInverted)
+            else if (transform.position.y <= flipHeight - flipBuffer && isInverted)
             {
                 movement.FlipGravity();
                 isInverted = false;

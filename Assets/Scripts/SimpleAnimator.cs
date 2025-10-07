@@ -37,7 +37,7 @@ public class SimpleAnimator : MonoBehaviour
     private void FlipMovingSprite()
     {
         // right side up flipping
-        if (player._gravityDirection == 1)
+        if (player.gravityDirection == 1)
         {
             if (rb.linearVelocity.x > 0)
                 sr.flipX = true;
@@ -45,7 +45,7 @@ public class SimpleAnimator : MonoBehaviour
                 sr.flipX = false;
         }
         // upside down flipping
-        else if (player._gravityDirection == -1)
+        else if (player.gravityDirection == -1)
         {
             if (rb.linearVelocity.x < 0)
                 sr.flipX = true;

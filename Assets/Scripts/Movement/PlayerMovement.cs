@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
@@ -30,6 +32,10 @@ namespace Movement
         private bool _isJumping;
         private bool _isFalling;
         private int _numberOfJumpsUsed;
+        
+        //bounce vars
+        private bool _isBounced;
+        private float _bounceForce;
 
         //jump buffer vars
         private float _jumpBufferTimer;
@@ -39,7 +45,7 @@ namespace Movement
         private float _coyoteTimer;
         
         //gravity invert var
-        public int _gravityDirection { get; private set; } = 1;
+        public int gravityDirection { get; private set; } = 1;
 
         private void Awake()
         {
@@ -132,23 +138,6 @@ namespace Movement
             if (InputManager.JumpWasPressed)
             {
                 _jumpBufferTimer = MoveStats.JumpBufferTime;
-                _jumpReleasedDuringBuffer = false;
-            }
-
-            //when we release the jump button
-            if (InputManager.JumpWasReleased)
-            {
-                if (_jumpBufferTimer > 0f)
-                {
-                    _jumpReleasedDuringBuffer = true;
-                }
-
-                //might need to fix with invert
-                if (_isJumping && VerticalVelocity > 0f)
-                {
-                    
-                }
-
             }
 
             //initiate jump with jump buffering and coyote time
@@ -173,7 +162,7 @@ namespace Movement
 
             //landed
             // might need to be fixed with invert gravity?
-            if ((_isJumping || _isFalling) && _isGrounded && ((VerticalVelocity <= 0f && _gravityDirection == 1) || (VerticalVelocity > 0f && _gravityDirection == -1)))
+            if ((_isJumping || _isFalling) && _isGrounded && ((VerticalVelocity <= 0f && gravityDirection == 1) || (VerticalVelocity > 0f && gravityDirection == -1)))
             {
                 _isJumping = false;
                 _isFalling = false;
@@ -181,7 +170,7 @@ namespace Movement
                 _numberOfJumpsUsed = 0;
             
                 // default gravity value based on physics system
-                VerticalVelocity = MoveStats.Gravity * _gravityDirection;
+                VerticalVelocity = MoveStats.Gravity * gravityDirection;
             }
             
             
@@ -196,12 +185,31 @@ namespace Movement
 
             _jumpBufferTimer = 0f;
             _numberOfJumpsUsed += numberOfJumpsUsed;
-            VerticalVelocity = MoveStats.InitialJumpVelocity * _gravityDirection;
+            VerticalVelocity = MoveStats.InitialJumpVelocity * gravityDirection;
         }
 
         private void Jump()
         {
             Debug.Log($"VelY: {VerticalVelocity}, Gravity: {MoveStats.Gravity}, Grounded: {_isGrounded}, Jumping: {_isJumping}");
+            // Apply bounce logic first
+            if (_isBounced)
+            {
+                // Let gravity start affecting bounce immediately
+                VerticalVelocity += MoveStats.Gravity * gravityDirection * Time.fixedDeltaTime * _bounceForce;
+
+                // When bounce slows down, stop bouncing
+                if (VerticalVelocity <= 0f)
+                {
+                    if (!_isFalling)
+                    {
+                        _isFalling = true;
+                    }
+                    _isBounced = false;
+                }
+
+                _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, VerticalVelocity);
+                return; // skip rest of Jump() this frame
+            }
             //apply gravity while jumping
             if (_isJumping)
             {
@@ -219,7 +227,7 @@ namespace Movement
                 
                 if (VerticalVelocity >= 0f)
                 {
-                    VerticalVelocity += MoveStats.Gravity * _gravityDirection * Time.fixedDeltaTime;
+                        VerticalVelocity += MoveStats.Gravity * gravityDirection * Time.fixedDeltaTime;
                 }
                 
                 //gravity on descending
@@ -235,11 +243,20 @@ namespace Movement
             //normal gravity while falling
             if (!_isGrounded && _isFalling)
             {
-                VerticalVelocity += MoveStats.Gravity * _gravityDirection * Time.fixedDeltaTime;
+                VerticalVelocity += MoveStats.Gravity * gravityDirection * Time.fixedDeltaTime;
             }
             
-            //clamp fall speed
-            VerticalVelocity = Mathf.Clamp(VerticalVelocity, -MoveStats.MaxFallSpeed, 50f);
+            // Clamp fall speed depending on gravity direction
+            if (gravityDirection == 1)
+            {
+                // Normal gravity: fall downward (negative Y)
+                VerticalVelocity = Mathf.Clamp(VerticalVelocity, -MoveStats.MaxFallSpeed, 50f);
+            }
+            else
+            {
+                // Inverted gravity: fall upward (positive Y)
+                VerticalVelocity = Mathf.Clamp(VerticalVelocity, -50f, MoveStats.MaxFallSpeed);
+            }
             
             _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, VerticalVelocity); 
         }
@@ -251,7 +268,7 @@ namespace Movement
         private void IsGrounded()
         {
             // Pick origin based on gravity direction
-            float yOrigin = (_gravityDirection == 1) 
+            float yOrigin = (gravityDirection == 1) 
                 ? _feetColl.bounds.min.y      // bottom for normal gravity
                 : _feetColl.bounds.max.y;     // top for inverted gravity
     
@@ -259,7 +276,7 @@ namespace Movement
             Vector2 boxCastSize = new Vector2(_bodyColl.bounds.size.x, MoveStats.GroundDetectionRayLength);
 
             // Cast in direction of "gravity down"
-            Vector2 castDir = (_gravityDirection == 1) ? Vector2.down : Vector2.up;
+            Vector2 castDir = (gravityDirection == 1) ? Vector2.down : Vector2.up;
 
             _groundHit = Physics2D.BoxCast(boxCastOrigin, boxCastSize, 0f, castDir, MoveStats.GroundDetectionRayLength, MoveStats.GroundLayer);
             
@@ -292,7 +309,7 @@ namespace Movement
         private void BumpedHead()
         {
             // Opposite of grounded: check "against" gravity
-            float yOrigin = (_gravityDirection == 1)
+            float yOrigin = (gravityDirection == 1)
                 ? _bodyColl.bounds.max.y      // top for normal gravity
                 : _feetColl.bounds.min.y;     // bottom for inverted gravity
 
@@ -300,7 +317,7 @@ namespace Movement
             Vector2 boxCastSize = new Vector2(_bodyColl.bounds.size.x * MoveStats.HeadWidth, MoveStats.HeadDetectionRayLength);
 
             // Cast opposite gravity
-            Vector2 castDir = (_gravityDirection == 1) ? Vector2.up : Vector2.down;
+            Vector2 castDir = (gravityDirection == 1) ? Vector2.up : Vector2.down;
 
             _headHit = Physics2D.BoxCast(boxCastOrigin, boxCastSize, 0f, castDir, MoveStats.HeadDetectionRayLength, MoveStats.GroundLayer);
             
@@ -358,8 +375,29 @@ namespace Movement
 
         public void FlipGravity()
         {
-            _gravityDirection *= -1;
+            gravityDirection *= -1;
             transform.rotation *= Quaternion.Euler(0f, 0f, 180f);
+        }
+        
+        public void Bounce(float bounceStrength)
+        {
+            // Start bounce with upward velocity
+            VerticalVelocity = bounceStrength * -gravityDirection;
+            _bounceForce = bounceStrength * -gravityDirection;
+            _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, VerticalVelocity);
+            _isBounced = true;
+            _isJumping = false; // Not a normal jump
+            _isFalling = false;
+            _isGrounded = false;
+            
+            InitiateJump(1); // trigger jump state immediately
+            StartCoroutine(BounceCooldown());
+        }
+
+        private IEnumerator BounceCooldown()
+        {
+            yield return new WaitForSeconds(.05f);
+            _isBounced = false;
         }
     }
 }
