@@ -190,7 +190,7 @@ namespace Movement
 
         private void Jump()
         {
-            Debug.Log($"VelY: {VerticalVelocity}, Gravity: {MoveStats.Gravity}, Grounded: {_isGrounded}, Jumping: {_isJumping}");
+            // Debug.Log($"VelY: {VerticalVelocity}, Gravity: {MoveStats.Gravity}, Grounded: {_isGrounded}, Jumping: {_isJumping}");
             // Apply bounce logic first
             if (_isBounced)
             {
