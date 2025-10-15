@@ -48,11 +48,16 @@ namespace ScreenControllers
         public void ShowPauseScreen()
         {
             pauseScreen.SetActive(true);
+            Time.timeScale = 0;
+            
+            
         }
 
         public void HidePauseScreen()
         {
             pauseScreen.SetActive(false);
+            Time.timeScale = 1;
+            
         }
 
         public void ShowOptionsScreen()

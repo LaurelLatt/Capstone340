@@ -11,6 +11,7 @@ namespace Movement
         [Range(.25f, 50f)] public float GroundDeceleration = 20f;
         [Range(.25f, 50f)] public float AirAcceleration = 5f;
         [Range(.25f, 50f)] public float AirDeceleration = 5f;
+        [Range(1f, 100f)] public float MaxAirSpeed = 6f;
         
         [Header("Run")]
         [Range(1f, 100f)] public float MaxRunSpeed = 20f;

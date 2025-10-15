@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
         {
             player.transform.position = levelData.playerSpawn.position;
         }
+        Time.timeScale = 1;
         
     }
 }

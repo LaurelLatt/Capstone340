@@ -76,57 +76,68 @@ namespace Movement
 
         #region Movement
 
+        // private void Move(float acceleration, float deceleration, Vector2 moveInput)
+        // {
+        //     if (moveInput != Vector2.zero)
+        //     {
+        //         //TurnCheck(moveInput);
+        //
+        //         Vector2 targetVelocity;
+        //         if (InputManager.RunIsHeld)
+        //         {
+        //             targetVelocity = new Vector2(moveInput.x, 0f) * MoveStats.MaxRunSpeed;
+        //         }
+        //         else
+        //         {
+        //             targetVelocity = new Vector2(moveInput.x, 0f) * MoveStats.MaxWalkSpeed;
+        //         }
+        //
+        //         _moveVelocity = Vector2.Lerp(_moveVelocity, targetVelocity, acceleration * Time.fixedDeltaTime);
+        //         _rb.linearVelocity = new Vector2(_moveVelocity.x, _rb.linearVelocity.y);
+        //     }
+        //     else if (moveInput == Vector2.zero)
+        //     {
+        //         _moveVelocity = Vector2.Lerp(_moveVelocity, Vector2.zero, deceleration * Time.fixedDeltaTime);
+        //         _rb.linearVelocity = new Vector2(_moveVelocity.x, _rb.linearVelocity.y);
+        //     }
+        // }
+        
         private void Move(float acceleration, float deceleration, Vector2 moveInput)
         {
             if (moveInput != Vector2.zero)
             {
-                //TurnCheck(moveInput);
-
                 Vector2 targetVelocity;
-                if (InputManager.RunIsHeld)
+
+                // Determine base speed
+                float baseSpeed = InputManager.RunIsHeld ? MoveStats.MaxRunSpeed : MoveStats.MaxWalkSpeed;
+
+                // 🔹 Reduce control while in the air
+                if (!_isGrounded)
                 {
-                    targetVelocity = new Vector2(moveInput.x, 0f) * MoveStats.MaxRunSpeed;
+                    baseSpeed *= 0.6f;               // 60% of normal speed while airborne
+                    acceleration *= 0.5f;            // slower acceleration for smoother control
                 }
-                else
-                {
-                    targetVelocity = new Vector2(moveInput.x, 0f) * MoveStats.MaxWalkSpeed;
-                }
+
+                targetVelocity = new Vector2(moveInput.x, 0f) * baseSpeed;
 
                 _moveVelocity = Vector2.Lerp(_moveVelocity, targetVelocity, acceleration * Time.fixedDeltaTime);
+
+                // 🔹 Clamp max horizontal velocity while in air
+                if (!_isGrounded)
+                {
+                    float maxAirSpeed = MoveStats.MaxAirSpeed; // add to your MoveStats (e.g., 6f)
+                    _moveVelocity.x = Mathf.Clamp(_moveVelocity.x, -maxAirSpeed, maxAirSpeed);
+                }
+
                 _rb.linearVelocity = new Vector2(_moveVelocity.x, _rb.linearVelocity.y);
             }
-            else if (moveInput == Vector2.zero)
+            else
             {
                 _moveVelocity = Vector2.Lerp(_moveVelocity, Vector2.zero, deceleration * Time.fixedDeltaTime);
                 _rb.linearVelocity = new Vector2(_moveVelocity.x, _rb.linearVelocity.y);
             }
         }
 
-        // private void TurnCheck(Vector2 moveInput)
-        // {
-        //     if (_isFacingRight && moveInput.x > 0)
-        //     {
-        //         Turn(false);
-        //     }
-        //     else if (!_isFacingRight && moveInput.x > 0)
-        //     {
-        //         Turn(true);
-        //     }
-        // }
-        //
-        // private void Turn(bool turnRight)
-        // {
-        //     if (turnRight)
-        //     {
-        //         _isFacingRight = true;
-        //         transform.Rotate(0f, 180f, 0f);
-        //     }
-        //     else
-        //     {
-        //         _isFacingRight = false;
-        //         transform.Rotate(0f, -180f, 0f);
-        //     }
-        // }
 
         #endregion
 
