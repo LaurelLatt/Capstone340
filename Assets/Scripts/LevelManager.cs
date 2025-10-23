@@ -4,13 +4,13 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour
 {
     [Header("Scene References")]
-    [SerializeField] private Transform playerSpawn;
+    [SerializeField] private Vector3 playerSpawn;
 
     [Header("Collectibles")]
     [SerializeField] private bool hasCollectibles;
     [SerializeField] private int totalCollectibles;
 
-    private int collected;
+    private int collectedItems;
 
     public void ApplySettings(LevelSettings settings)
     {
@@ -18,17 +18,20 @@ public class LevelManager : MonoBehaviour
         var player = GameManager.Instance.player;
         if (player != null)
         {
-            Vector3 spawn = settings.spawnPosition != Vector3.zero 
-                ? settings.spawnPosition 
-                : (playerSpawn != null ? playerSpawn.position : Vector3.zero);
-
+            Vector3 spawn = settings.spawnPosition;
             player.transform.position = spawn;
+            playerSpawn = spawn;
 
             // Apply gravity inversion or other toggles
+            Debug.Log($"Height inversion enabled? {settings.heightInversionEnabled}");
             if (settings.heightInversionEnabled)
+            {
                 player.EnableHeightInversion();
+            }
             else
+            {
                 player.DisableHeightInversion();
+            }
         }
 
         // Initialize collectible UI
@@ -36,14 +39,14 @@ public class LevelManager : MonoBehaviour
         {
             hasCollectibles = true;
             totalCollectibles = settings.totalCollectibles;
-            collected = 0;
-            GameManager.Instance.GameScreen.ShowCollectedText();
-            GameManager.Instance.GameScreen.UpdateCollectibleUI(collected);
+            ResetCollectibles();
+            GameManager.Instance.gameScreen.ShowCollectedText();
+            
         }
         else
         {
             hasCollectibles = false;
-            GameManager.Instance.GameScreen.HideCollectedText();
+            GameManager.Instance.gameScreen.HideCollectedText();
         }
     }
 
@@ -53,37 +56,47 @@ public class LevelManager : MonoBehaviour
         if (GameManager.Instance == null) return;
 
         var player = GameManager.Instance.player;
-        if (playerSpawn != null)
-            player.transform.position = playerSpawn.position;
+        
+        player.transform.position = playerSpawn;
 
         if (hasCollectibles)
         {
-            GameManager.Instance.GameScreen.ShowCollectedText();
-            GameManager.Instance.GameScreen.UpdateCollectibleUI(0);
+            GameManager.Instance.gameScreen.ShowCollectedText();
+            ResetCollectibles();
         }
     }
 
     public void LevelReset()
     {
-        collected = 0;
-        GameManager.Instance.GameScreen.UpdateCollectibleUI(collected);
-        GameManager.Instance.player.transform.position = playerSpawn.position;
+        ResetCollectibles();
+        // Re-enable all collectibles in the level
+        foreach (var collectible in FindObjectsByType<Collectible>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+        {
+            collectible.gameObject.SetActive(true);
+        }
+        GameManager.Instance.player.transform.position = playerSpawn;
+    }
+
+    private void ResetCollectibles()
+    {
+        collectedItems = 0;
+        GameManager.Instance.gameScreen.UpdateCollectibleUI(collectedItems);
     }
 
     public void CollectItem()
     {
         if (!hasCollectibles) return;
 
-        collected++;
-        GameManager.Instance.GameScreen.UpdateCollectibleUI(collected);
+        collectedItems++;
+        GameManager.Instance.gameScreen.UpdateCollectibleUI(collectedItems);
 
-        if (collected >= totalCollectibles)
+        if (collectedItems >= totalCollectibles)
             LevelComplete();
     }
 
     private void LevelComplete()
     {
         Debug.Log("Level Complete!");
-        // Optionally trigger GameManager.Instance.OnLevelComplete();
+        GameManager.Instance.OnLevelComplete();
     }
 }

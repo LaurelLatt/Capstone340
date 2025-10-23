@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Collectibles : MonoBehaviour
+public class Collectible : MonoBehaviour
 {
     public LevelManager levelManager;
     private void OnTriggerEnter2D(Collider2D col)
@@ -10,7 +10,7 @@ public class Collectibles : MonoBehaviour
         {
             Debug.Log("Player collected item!");
             levelManager.CollectItem();
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
     

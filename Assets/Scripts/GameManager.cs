@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     public PlayerController player;
-    public GameScreenController GameScreen;
+    public GameScreenController gameScreen;
     public LevelSettings[] allLevels;
 
     private int currentLevelIndex = 0;
@@ -56,5 +56,10 @@ public class GameManager : MonoBehaviour
     {
         LevelManager levelManager = FindFirstObjectByType<LevelManager>();
         levelManager.LevelReset();
+    }
+
+    public void OnLevelComplete()
+    {
+        gameScreen.GoToResults();
     }
 }

@@ -4106,7 +4106,6 @@ GameObject:
   - component: {fileID: 700122953}
   - component: {fileID: 700122952}
   - component: {fileID: 700122956}
-  - component: {fileID: 700122957}
   m_Layer: 9
   m_Name: Platforms
   m_TagString: Untagged
@@ -4896,19 +4895,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlatformController
   isFlickering: 0
---- !u!114 &700122957
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 700122950}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93d926bd3345c4fdb9874df27e922965, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GravityInverters.GravityInverter
-  flipOnEnter: 1
 --- !u!1 &706029878
 GameObject:
   m_ObjectHideFlags: 0

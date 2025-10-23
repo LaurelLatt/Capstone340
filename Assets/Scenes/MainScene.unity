@@ -1229,7 +1229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   player: {fileID: 349388368}
-  GameScreen: {fileID: 1748232629}
+  gameScreen: {fileID: 1748232629}
   allLevels:
   - {fileID: 11400000, guid: ad168ee82a3124e18a1d1fdd1eb5a12f, type: 2}
   - {fileID: 11400000, guid: 0c4aed11124164e98bef35b8d728def3, type: 2}

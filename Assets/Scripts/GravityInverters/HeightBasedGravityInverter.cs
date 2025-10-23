@@ -12,7 +12,6 @@ namespace GravityInverters
 
         private bool isInverted = false;
         private PlayerMovement movement;
-        private bool canInvert = false;
 
         private void Start()
         {
@@ -22,7 +21,6 @@ namespace GravityInverters
 
         private void FixedUpdate()
         {
-            if (!canInvert) return;
             if (movement == null) return;
 
             if (transform.position.y > flipHeight + flipBuffer && !isInverted)
@@ -40,12 +38,12 @@ namespace GravityInverters
 
         public void EnableGravityInverter()
         {
-            canInvert = true;
+            enabled = true;
         }
 
         public void DisableGravityInverter()
         {
-            canInvert = false;
+            enabled = false;
         }
     }
 }
