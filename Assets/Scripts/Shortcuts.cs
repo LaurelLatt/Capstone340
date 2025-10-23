@@ -4,8 +4,6 @@ using UnityEngine;
 public class Shortcuts : MonoBehaviour
 {
     public UIScreenManager uiScreenManager;
-    public GameManager gameManager;
-    public LevelManager levelManager;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -19,12 +17,12 @@ public class Shortcuts : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             uiScreenManager.ShowGameScreen();
-            levelManager.LoadLevel(0);
+            GameManager.Instance.LoadLevel(0);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             uiScreenManager.ShowGameScreen();
-            levelManager.LoadLevel(1);
+            GameManager.Instance.LoadLevel(1);
         }
     }
 }

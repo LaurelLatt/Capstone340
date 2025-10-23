@@ -1,15 +1,18 @@
+using GravityInverters;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     private Vector3 startPosition;
     private Rigidbody2D rb;
+    private HeightBasedGravityInverter gravityInverter;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         startPosition = transform.position;
         rb = GetComponent<Rigidbody2D>();
+        gravityInverter = GetComponent<HeightBasedGravityInverter>();
     }
 
     // Update is called once per frame
@@ -29,6 +32,16 @@ public class PlayerController : MonoBehaviour
         {
             ResetPosition();
         }
+    }
+
+    public void EnableHeightInversion()
+    {
+        gravityInverter.EnableGravityInverter();
+    }
+
+    public void DisableHeightInversion()
+    {
+        gravityInverter.DisableGravityInverter();
     }
 
     public void Freeze()

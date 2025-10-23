@@ -15,10 +15,10 @@ namespace ScreenControllers
 
         public void OnLevelSelected(int levelIndex)
         {
-            Debug.Log("Level " + levelIndex + " selected");
+            DebugLogger.Log(LogChannel.Gameplay, "Level " + levelIndex + " selected");
             // Later: store this index in a GameManager or LevelManager
             uiScreenManager.ShowGameScreen();
-            levelManager.LoadLevel(levelIndex);
+            GameManager.Instance.LoadLevel(levelIndex);
         }
 
         public void GoToOptionsMenu()

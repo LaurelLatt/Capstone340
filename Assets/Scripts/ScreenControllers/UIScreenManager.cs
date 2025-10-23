@@ -17,6 +17,7 @@ namespace ScreenControllers
         void Start()
         {
             ShowStartScreen();
+            DebugLogger.SetLevel(LogChannel.Gameplay, LogLevel.Info);
         }
 
         // Update is called once per frame

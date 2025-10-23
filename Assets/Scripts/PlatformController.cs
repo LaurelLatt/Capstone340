@@ -1,17 +1,18 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class PlatformController : MonoBehaviour
 {
     public bool isFlickering = false;
-    private Collider2D platformCollider;
-    private SpriteRenderer platformRenderer;
+    private Tilemap tilemap;
+    private TilemapCollider2D tilemapCollider;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     void Awake()
     {
-        platformCollider = GetComponent<Collider2D>();
-        platformRenderer = GetComponent<SpriteRenderer>();
+        tilemap = GetComponent<Tilemap>();
+        tilemapCollider = GetComponent<TilemapCollider2D>();
     }
     void Start()
     {
@@ -29,7 +30,7 @@ public class PlatformController : MonoBehaviour
 
     private void DisablePlatform()
     {
-        platformRenderer.enabled = false;
+        tilemapCollider.enabled = false;
     }
 
     private void FlickerPlatform()
@@ -39,17 +40,26 @@ public class PlatformController : MonoBehaviour
     
     private IEnumerator TempDisablePlatform()
     {
-        platformCollider.enabled = false;
-        platformRenderer.color = new Color(1f, 0.5f, 0.5f, .7f);
+        tilemapCollider.enabled = false;
+        ChangePlatformOpacity(.5f);
         yield return new WaitForSeconds(2f);
         StartCoroutine(TempEnablePlatform());
     }
 
+    
+
     private IEnumerator TempEnablePlatform()
     {
-        platformCollider.enabled = true;
-        platformRenderer.color = new Color(1f, 0.5f, 0.5f, 1f);
+        tilemapCollider.enabled = true;
+        ChangePlatformOpacity(1f);
         yield return new WaitForSeconds(2f);
         StartCoroutine(TempDisablePlatform());
+    }
+    
+    private void ChangePlatformOpacity(float opacity)
+    {
+        Color c = tilemap.color;
+        c.a = opacity;
+        tilemap.color = c;
     }
 }

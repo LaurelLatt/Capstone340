@@ -6,7 +6,6 @@ namespace ScreenControllers
     public class ResultsScreenController : MonoBehaviour
     {
         public UIScreenManager uiScreenManager;
-        public GameManager gameManager;
 
         public Text resultsText;
 
@@ -31,7 +30,7 @@ namespace ScreenControllers
         public void RetryLevel()
         {
             uiScreenManager.ShowGameScreen();
-            gameManager.LevelReset();
+            GameManager.Instance.LevelReset();
         }
 
         public void GoToSelectScreen()
