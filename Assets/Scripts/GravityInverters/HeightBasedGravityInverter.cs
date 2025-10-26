@@ -11,6 +11,8 @@ namespace GravityInverters
         [SerializeField] private float flipBuffer = 0.5f; // prevents repeated flipping
 
         private bool isInverted = false;
+        private bool nextFrameIgnored = false;
+        
         private PlayerMovement movement;
 
         private void Start()
@@ -21,7 +23,11 @@ namespace GravityInverters
 
         private void FixedUpdate()
         {
-            if (movement == null) return;
+            if (nextFrameIgnored)
+            {
+                nextFrameIgnored = false;
+                return;
+            }
 
             if (transform.position.y > flipHeight + flipBuffer && !isInverted)
             {
@@ -33,7 +39,6 @@ namespace GravityInverters
                 movement.FlipGravity();
                 isInverted = false;
             }
-
         }
 
         public void EnableGravityInverter()
@@ -44,6 +49,16 @@ namespace GravityInverters
         public void DisableGravityInverter()
         {
             enabled = false;
+        }
+        
+        public void IgnoreNextFrame()
+        {
+            nextFrameIgnored = true;
+        }
+        
+        public void ResetState(bool inverted)
+        {
+            isInverted = inverted;
         }
     }
 }

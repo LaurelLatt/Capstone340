@@ -75,32 +75,6 @@ namespace Movement
         }
 
         #region Movement
-
-        // private void Move(float acceleration, float deceleration, Vector2 moveInput)
-        // {
-        //     if (moveInput != Vector2.zero)
-        //     {
-        //         //TurnCheck(moveInput);
-        //
-        //         Vector2 targetVelocity;
-        //         if (InputManager.RunIsHeld)
-        //         {
-        //             targetVelocity = new Vector2(moveInput.x, 0f) * MoveStats.MaxRunSpeed;
-        //         }
-        //         else
-        //         {
-        //             targetVelocity = new Vector2(moveInput.x, 0f) * MoveStats.MaxWalkSpeed;
-        //         }
-        //
-        //         _moveVelocity = Vector2.Lerp(_moveVelocity, targetVelocity, acceleration * Time.fixedDeltaTime);
-        //         _rb.linearVelocity = new Vector2(_moveVelocity.x, _rb.linearVelocity.y);
-        //     }
-        //     else if (moveInput == Vector2.zero)
-        //     {
-        //         _moveVelocity = Vector2.Lerp(_moveVelocity, Vector2.zero, deceleration * Time.fixedDeltaTime);
-        //         _rb.linearVelocity = new Vector2(_moveVelocity.x, _rb.linearVelocity.y);
-        //     }
-        // }
         
         private void Move(float acceleration, float deceleration, Vector2 moveInput)
         {
@@ -388,6 +362,32 @@ namespace Movement
         {
             gravityDirection *= -1;
             transform.rotation *= Quaternion.Euler(0f, 0f, 180f);
+        }
+
+        public void ResetMovement()
+        {
+            gravityDirection = 1;
+            transform.rotation = Quaternion.identity;
+
+            // Core physics reset 
+            _rb.linearVelocity = Vector2.zero;
+            VerticalVelocity = 0f;
+
+            // Movement state reset
+            _isJumping = false;
+            _isFalling = false;
+            _isBounced = false;
+            _numberOfJumpsUsed = 0;
+            _jumpBufferTimer = 0f;
+            _coyoteTimer = 0f;
+
+            // Force grounded reset if you spawn on a platform
+            _isGrounded = true;
+
+            DebugLogger.Log(LogChannel.Gameplay, 
+                $"Gravity reset. Direction={gravityDirection}, VerticalVelocity={VerticalVelocity}, " +
+                $"Grounded={_isGrounded}, Jumping={_isJumping}", 
+                LogLevel.Info);
         }
         
         public void Bounce(float bounceStrength)

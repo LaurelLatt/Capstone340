@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public PlayerController player;
     public GameScreenController gameScreen;
     public LevelSettings[] allLevels;
+    public CameraFade cameraFade;
 
     private int currentLevelIndex = 0;
     private AsyncOperation loadOperation;

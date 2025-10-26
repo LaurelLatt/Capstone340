@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: Level2Settings
   m_EditorClassIdentifier: Assembly-CSharp::LevelSettings
   spawnPosition: {x: 0, y: -1, z: 0}
+  levelName: Level2
   hasCollectibles: 0
   totalCollectibles: 0
-  levelName: Level2
+  collectiblesAsWinCondition: 0
   heightInversionEnabled: 0
+  hasCameraFade: 1
+  fadeWaitTime: 4

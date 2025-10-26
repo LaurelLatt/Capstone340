@@ -10,20 +10,24 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private bool hasCollectibles;
     [SerializeField] private int totalCollectibles;
 
+    private LevelSettings levelSettings;
     private int collectedItems;
 
     public void ApplySettings(LevelSettings settings)
     {
+        levelSettings = settings;
         // Set up the player’s starting position
-        var player = GameManager.Instance.player;
+        PlayerController player = GameManager.Instance.player;
         if (player != null)
         {
+            ResetSettings(player);
+            
             Vector3 spawn = settings.spawnPosition;
             player.transform.position = spawn;
             playerSpawn = spawn;
 
             // Apply gravity inversion or other toggles
-            Debug.Log($"Height inversion enabled? {settings.heightInversionEnabled}");
+            DebugLogger.Log(LogChannel.Gameplay, $"Height inversion enabled? {settings.heightInversionEnabled}");
             if (settings.heightInversionEnabled)
             {
                 player.EnableHeightInversion();
@@ -47,6 +51,29 @@ public class LevelManager : MonoBehaviour
         {
             hasCollectibles = false;
             GameManager.Instance.gameScreen.HideCollectedText();
+        }
+
+        ApplyCameraFadeSettings(settings);
+    }
+
+    private static void ApplyCameraFadeSettings(LevelSettings settings)
+    {
+        DebugLogger.Log(LogChannel.Gameplay,$"Camera fade enabled?: {settings.hasCameraFade}");
+        if (settings.hasCameraFade)
+        {
+            GameManager.Instance.cameraFade.TurnOnFade();
+            if (settings.fadeWaitTime > 0)
+            {
+                GameManager.Instance.cameraFade.StartFadeLoop(settings.fadeWaitTime);
+            }
+            else
+            {
+                GameManager.Instance.cameraFade.StartFadeLoop();
+            }
+        }
+        else
+        {
+            GameManager.Instance.cameraFade.TurnOffFade();
         }
     }
 
@@ -90,13 +117,25 @@ public class LevelManager : MonoBehaviour
         collectedItems++;
         GameManager.Instance.gameScreen.UpdateCollectibleUI(collectedItems);
 
-        if (collectedItems >= totalCollectibles)
+        if (collectedItems >= totalCollectibles && levelSettings.collectiblesAsWinCondition)
             LevelComplete();
     }
 
     private void LevelComplete()
     {
-        Debug.Log("Level Complete!");
+        DebugLogger.Log(LogChannel.Gameplay, "Level Complete!");
         GameManager.Instance.OnLevelComplete();
+    }
+
+    private void ResetSettings(PlayerController player)
+    {
+        player.DisableHeightInversion();
+        player.transform.position = Vector3.zero;
+        player.ResetMovement();
+        ResetCollectibles();
+        hasCollectibles = false;
+        GameManager.Instance.gameScreen.HideCollectedText();
+        GameManager.Instance.cameraFade.TurnOffFade();
+        
     }
 }
