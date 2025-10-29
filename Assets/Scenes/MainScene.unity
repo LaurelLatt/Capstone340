@@ -4442,10 +4442,18 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3945666554408700734, guid: e22d2a7927fe84f7bb766bc4a6846dae, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 211b4308abad84384b04cf024c578298, type: 2}
     - target: {fileID: 6150082716194581031, guid: e22d2a7927fe84f7bb766bc4a6846dae, type: 3}
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 6154573096377528263, guid: e22d2a7927fe84f7bb766bc4a6846dae, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 211b4308abad84384b04cf024c578298, type: 2}
     - target: {fileID: 6483711117328799136, guid: e22d2a7927fe84f7bb766bc4a6846dae, type: 3}
       propertyPath: m_Layer
       value: 3
