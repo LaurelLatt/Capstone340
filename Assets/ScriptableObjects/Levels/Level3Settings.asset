@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c4d016343db644f42beb4552f3b5ed0d, type: 3}
-  m_Name: Level2Settings
+  m_Name: Level3Settings
   m_EditorClassIdentifier: Assembly-CSharp::LevelSettings
   spawnPosition: {x: 0, y: -1, z: 0}
-  levelName: Level2
-  hasCollectibles: 1
-  totalCollectibles: 5
-  collectiblesAsWinCondition: 1
+  levelName: Level3
+  hasCollectibles: 0
+  totalCollectibles: 0
+  collectiblesAsWinCondition: 0
   heightInversionEnabled: 0
-  hasCameraFade: 1
-  fadeWaitTime: 4
+  hasCameraFade: 0
+  fadeWaitTime: 0

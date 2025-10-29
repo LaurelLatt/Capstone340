@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
 
     private void CheckForFalling()
     {
-        if (transform.position.y < -30)
+        if (transform.position.y < -10 || transform.position.y > 20)
         {
             ResetPosition();
         }
