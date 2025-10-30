@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private HeightBasedGravityInverter gravityInverter;
     private PlayerMovement playerMovement;
+
+    public bool isFrozen { get; private set; } = false;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -52,15 +54,17 @@ public class PlayerController : MonoBehaviour
 
     public void Freeze()
     {
-        rb.constraints = RigidbodyConstraints2D.FreezePositionY;
-        rb.constraints = RigidbodyConstraints2D.FreezePositionX;
+        // Freeze both X and Y position, but still prevent rotation
+        rb.constraints = RigidbodyConstraints2D.FreezePositionX 
+                         | RigidbodyConstraints2D.FreezeRotation;
+        isFrozen = true;
     }
 
     public void Unfreeze()
     {
-        rb.constraints = RigidbodyConstraints2D.None;
+        // Allow movement, but keep rotation locked so the player doesn’t tilt
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-        
+        isFrozen = false;
     }
 
     public void ResetMovement()

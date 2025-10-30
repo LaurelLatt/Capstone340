@@ -7,9 +7,13 @@ public class CameraFade : MonoBehaviour
     [Header("Fade Settings")]
     public Color fadeColor = Color.black;
     
+    [Header("Player Reference")]
+    public PlayerController player;
 
     [Header("UI Reference")]
     [SerializeField] private Image fadeImage;
+    
+    
     
     private void Awake()
     {
@@ -44,9 +48,15 @@ public class CameraFade : MonoBehaviour
         StartCoroutine(FadeLoop(1.5f, waitTime)); 
     }
 
+    public void StartFadeLoopWithFreeze(float waitTime = 2f)
+    {
+        player.Freeze();
+        StartCoroutine(FadeLoopWithFreeze(1.5f, waitTime));
+    }
     public void StopFadeLoop()
     {
         StopAllCoroutines();
+        player.Unfreeze();
     }
     
     private IEnumerator FadeOut(float duration)
@@ -88,6 +98,20 @@ public class CameraFade : MonoBehaviour
             yield return new WaitForSeconds(waitTime);
             yield return StartCoroutine(FadeOut(fadeDuration));
             yield return new WaitForSeconds(waitTime);
+            yield return StartCoroutine(FadeIn(fadeDuration));
+            
+        }
+    }
+    
+    private IEnumerator FadeLoopWithFreeze(float fadeDuration, float waitTime)
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(waitTime);
+            player.Unfreeze();
+            yield return StartCoroutine(FadeOut(fadeDuration));
+            yield return new WaitForSeconds(waitTime);
+            player.Freeze();
             yield return StartCoroutine(FadeIn(fadeDuration));
             
         }

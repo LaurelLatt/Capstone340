@@ -18,4 +18,8 @@ public class LevelSettings : ScriptableObject
     [Header("Camera Fade Variables")]
     public bool hasCameraFade;
     public float fadeWaitTime = 0;
+
+    [Header("Player Settings")] 
+    [Tooltip("This freezes the player for camera fade mechanic.")]
+    public bool playerFreeze;
 }

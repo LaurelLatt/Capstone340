@@ -62,13 +62,28 @@ public class LevelManager : MonoBehaviour
         if (settings.hasCameraFade)
         {
             GameManager.Instance.cameraFade.TurnOnFade();
-            if (settings.fadeWaitTime > 0)
+            // if (settings.fadeWaitTime > 0)
+            // {
+            //     GameManager.Instance.cameraFade.StartFadeLoop(settings.fadeWaitTime);
+            // }
+            // else
+            // {
+            //     GameManager.Instance.cameraFade.StartFadeLoop();
+            // }
+            switch ((settings.fadeWaitTime > 0, settings.playerFreeze))
             {
-                GameManager.Instance.cameraFade.StartFadeLoop(settings.fadeWaitTime);
-            }
-            else
-            {
-                GameManager.Instance.cameraFade.StartFadeLoop();
+                case (true, true):
+                    GameManager.Instance.cameraFade.StartFadeLoopWithFreeze(settings.fadeWaitTime);
+                    break;
+                case (true, false):
+                    GameManager.Instance.cameraFade.StartFadeLoop(settings.fadeWaitTime);
+                    break;
+                case (false, true):
+                    GameManager.Instance.cameraFade.StartFadeLoopWithFreeze();
+                    break;
+                case (false, false):
+                    GameManager.Instance.cameraFade.StartFadeLoop();
+                    break;
             }
         }
         else

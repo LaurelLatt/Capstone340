@@ -13,7 +13,8 @@ namespace Movement
 
         [SerializeField] private Collider2D _feetColl;
         [SerializeField] private Collider2D _bodyColl;
-
+        
+        private PlayerController _playerController;
         private Rigidbody2D _rb;
         private SimpleAnimator _animator;
 
@@ -51,6 +52,7 @@ namespace Movement
         {
             //_isFacingRight = true;
             _rb = GetComponent<Rigidbody2D>();
+            _playerController = GetComponent<PlayerController>();
         }
 
         private void Update()
@@ -119,10 +121,21 @@ namespace Movement
 
         private void JumpChecks()
         {
+            // don't jump if player is frozen, can still fall
+            if (_playerController.isFrozen)
+            {
+                _isJumping = false;
+            }
             //when we press the jump button
             if (InputManager.JumpWasPressed)
             {
                 _jumpBufferTimer = MoveStats.JumpBufferTime;
+            }
+            // don't jump if player is frozen, can still fall
+            if (_playerController.isFrozen)
+            {
+                _isJumping = false;
+                return;
             }
 
             //initiate jump with jump buffering and coyote time

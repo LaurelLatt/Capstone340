@@ -619,7 +619,7 @@ TilemapCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 211b4308abad84384b04cf024c578298, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -5247,7 +5247,7 @@ TilemapCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 211b4308abad84384b04cf024c578298, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -6671,9 +6671,7 @@ MonoBehaviour:
   groundTilemap: {fileID: 551840238}
   regionStart: {x: 39, y: -2, z: 0}
   regionSize: {x: 4, y: 3}
-  slideDistance: 4
-  slideDuration: 1
-  reopenDelay: 3
+  duration: 3
 --- !u!61 &1864119482
 BoxCollider2D:
   m_ObjectHideFlags: 0
