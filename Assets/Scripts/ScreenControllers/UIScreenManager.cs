@@ -4,13 +4,14 @@ namespace ScreenControllers
 {
     public class UIScreenManager : MonoBehaviour
     {
-        public GameObject startScreen;
-        public GameObject selectScreen;
-        public GameObject gameScreen;
-        public GameObject resultsScreen;
-        public GameObject pauseScreen;
-        public GameObject optionsScreen;
-
+        [SerializeField] private GameObject startScreen;
+        [SerializeField] private GameObject selectScreen;
+        [SerializeField] private GameObject gameScreen;
+        [SerializeField] private GameObject resultsScreen;
+        [SerializeField] private GameObject pauseScreen;
+        [SerializeField] private GameObject optionsScreen;
+        [SerializeField] private SelectScreenController selectScreenController;
+        
         private GameObject activeScreen;
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -33,6 +34,7 @@ namespace ScreenControllers
 
         public void ShowSelectScreen()
         {
+            selectScreenController.RefreshButtons();
             ShowScreen(selectScreen);
         }
 

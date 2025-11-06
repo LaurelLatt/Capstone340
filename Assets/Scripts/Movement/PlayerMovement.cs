@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Quaternion = UnityEngine.Quaternion;
 using Vector2 = UnityEngine.Vector2;
 
@@ -9,41 +10,40 @@ namespace Movement
 {
     public class PlayerMovement : MonoBehaviour
     {
-        [Header("References")] public PlayerMovementStats MoveStats;
-
-        [SerializeField] private Collider2D _feetColl;
-        [SerializeField] private Collider2D _bodyColl;
+        [Header("References")] 
+        public PlayerMovementStats moveStats;
+        [SerializeField] private Collider2D feetColl;
+        [SerializeField] private Collider2D bodyColl;
         
-        private PlayerController _playerController;
-        private Rigidbody2D _rb;
-        private SimpleAnimator _animator;
+        private PlayerController playerController;
+        private Rigidbody2D rb;
+        private SimpleAnimator animator;
 
         //movement vars
-        private Vector2 _moveVelocity;
-        //private bool _isFacingRight;
+        private Vector2 moveVelocity;
 
         //collision check vars
-        private RaycastHit2D _groundHit;
-        private RaycastHit2D _headHit;
-        private bool _isGrounded;
-        private bool _bumpedHead;
+        private RaycastHit2D groundHit;
+        private RaycastHit2D headHit;
+        private bool isGrounded;
+        private bool bumpedHead;
 
         //jump vars
-        public float VerticalVelocity { get; private set; }
-        private bool _isJumping;
-        private bool _isFalling;
-        private int _numberOfJumpsUsed;
+        public float verticalVelocity { get; private set; }
+        private bool isJumping;
+        private bool isFalling;
+        private int numberOfJumpsUsed;
         
         //bounce vars
-        private bool _isBounced;
-        private float _bounceForce;
+        private bool isBounced;
+        private float bounceForce;
 
         //jump buffer vars
-        private float _jumpBufferTimer;
-        private bool _jumpReleasedDuringBuffer;
+        private float jumpBufferTimer;
+        private bool jumpReleasedDuringBuffer;
 
         //coyote time vars
-        private float _coyoteTimer;
+        private float coyoteTimer;
         
         //gravity invert var
         public int gravityDirection { get; private set; } = 1;
@@ -51,8 +51,8 @@ namespace Movement
         private void Awake()
         {
             //_isFacingRight = true;
-            _rb = GetComponent<Rigidbody2D>();
-            _playerController = GetComponent<PlayerController>();
+            rb = GetComponent<Rigidbody2D>();
+            playerController = GetComponent<PlayerController>();
         }
 
         private void Update()
@@ -65,13 +65,13 @@ namespace Movement
         {
             CollisionChecks();
             Jump();
-            if (_isGrounded)
+            if (isGrounded)
             {
-                Move(MoveStats.GroundAcceleration, MoveStats.GroundDeceleration, InputManager.Movement);
+                Move(moveStats.GroundAcceleration, moveStats.GroundDeceleration, InputManager.Movement);
             }
             else
             {
-                Move(MoveStats.AirAcceleration, MoveStats.AirDeceleration, InputManager.Movement);
+                Move(moveStats.AirAcceleration, moveStats.AirDeceleration, InputManager.Movement);
                 
             }
         }
@@ -85,10 +85,10 @@ namespace Movement
                 Vector2 targetVelocity;
 
                 // Determine base speed
-                float baseSpeed = InputManager.RunIsHeld ? MoveStats.MaxRunSpeed : MoveStats.MaxWalkSpeed;
+                float baseSpeed = InputManager.RunIsHeld ? moveStats.MaxRunSpeed : moveStats.MaxWalkSpeed;
 
                 // 🔹 Reduce control while in the air
-                if (!_isGrounded)
+                if (!isGrounded)
                 {
                     baseSpeed *= 0.6f;               // 60% of normal speed while airborne
                     acceleration *= 0.5f;            // slower acceleration for smoother control
@@ -96,21 +96,21 @@ namespace Movement
 
                 targetVelocity = new Vector2(moveInput.x, 0f) * baseSpeed;
 
-                _moveVelocity = Vector2.Lerp(_moveVelocity, targetVelocity, acceleration * Time.fixedDeltaTime);
+                moveVelocity = Vector2.Lerp(moveVelocity, targetVelocity, acceleration * Time.fixedDeltaTime);
 
                 // 🔹 Clamp max horizontal velocity while in air
-                if (!_isGrounded)
+                if (!isGrounded)
                 {
-                    float maxAirSpeed = MoveStats.MaxAirSpeed; // add to your MoveStats (e.g., 6f)
-                    _moveVelocity.x = Mathf.Clamp(_moveVelocity.x, -maxAirSpeed, maxAirSpeed);
+                    float maxAirSpeed = moveStats.MaxAirSpeed; // add to your MoveStats (e.g., 6f)
+                    moveVelocity.x = Mathf.Clamp(moveVelocity.x, -maxAirSpeed, maxAirSpeed);
                 }
 
-                _rb.linearVelocity = new Vector2(_moveVelocity.x, _rb.linearVelocity.y);
+                rb.linearVelocity = new Vector2(moveVelocity.x, rb.linearVelocity.y);
             }
             else
             {
-                _moveVelocity = Vector2.Lerp(_moveVelocity, Vector2.zero, deceleration * Time.fixedDeltaTime);
-                _rb.linearVelocity = new Vector2(_moveVelocity.x, _rb.linearVelocity.y);
+                moveVelocity = Vector2.Lerp(moveVelocity, Vector2.zero, deceleration * Time.fixedDeltaTime);
+                rb.linearVelocity = new Vector2(moveVelocity.x, rb.linearVelocity.y);
             }
         }
 
@@ -122,53 +122,53 @@ namespace Movement
         private void JumpChecks()
         {
             // don't jump if player is frozen, can still fall
-            if (_playerController.isFrozen)
+            if (playerController.isFrozen)
             {
-                _isJumping = false;
+                isJumping = false;
             }
             //when we press the jump button
             if (InputManager.JumpWasPressed)
             {
-                _jumpBufferTimer = MoveStats.JumpBufferTime;
+                jumpBufferTimer = moveStats.JumpBufferTime;
             }
             // don't jump if player is frozen, can still fall
-            if (_playerController.isFrozen)
+            if (playerController.isFrozen)
             {
-                _isJumping = false;
+                isJumping = false;
                 return;
             }
 
             //initiate jump with jump buffering and coyote time
-            if (_jumpBufferTimer > 0f && !_isJumping && (_isGrounded || _coyoteTimer > 0f))
+            if (jumpBufferTimer > 0f && !isJumping && (isGrounded || coyoteTimer > 0f))
             {
                 InitiateJump(1);
                 
             }
 
             //double jump
-            else if (_jumpBufferTimer > 0f && _isJumping && _numberOfJumpsUsed < MoveStats.NumberOfJumpsAllowed)
+            else if (jumpBufferTimer > 0f && isJumping && numberOfJumpsUsed < moveStats.NumberOfJumpsAllowed)
             {
                 InitiateJump(1);
             }
             
             //air jump after coyote time lapsed
             // prevents two jumps after falling from ledge
-            else if (_jumpBufferTimer > 0f && _isFalling && _numberOfJumpsUsed < MoveStats.NumberOfJumpsAllowed - 1)
+            else if (jumpBufferTimer > 0f && isFalling && numberOfJumpsUsed < moveStats.NumberOfJumpsAllowed - 1)
             {
                 InitiateJump(2);
             }
 
             //landed
             // might need to be fixed with invert gravity?
-            if ((_isJumping || _isFalling) && _isGrounded && ((VerticalVelocity <= 0f && gravityDirection == 1) || (VerticalVelocity > 0f && gravityDirection == -1)))
+            if ((isJumping || isFalling) && isGrounded && ((verticalVelocity <= 0f && gravityDirection == 1) || (verticalVelocity > 0f && gravityDirection == -1)))
             {
-                _isJumping = false;
-                _isFalling = false;
+                isJumping = false;
+                isFalling = false;
                 
-                _numberOfJumpsUsed = 0;
+                numberOfJumpsUsed = 0;
             
                 // default gravity value based on physics system
-                VerticalVelocity = MoveStats.Gravity * gravityDirection;
+                verticalVelocity = moveStats.Gravity * gravityDirection;
             }
             
             
@@ -176,87 +176,87 @@ namespace Movement
 
         private void InitiateJump(int numberOfJumpsUsed)
         {
-            if (!_isJumping)
+            if (!isJumping)
             {
-                _isJumping = true;
+                isJumping = true;
             }
 
-            _jumpBufferTimer = 0f;
-            _numberOfJumpsUsed += numberOfJumpsUsed;
-            VerticalVelocity = MoveStats.InitialJumpVelocity * gravityDirection;
+            jumpBufferTimer = 0f;
+            this.numberOfJumpsUsed += numberOfJumpsUsed;
+            verticalVelocity = moveStats.InitialJumpVelocity * gravityDirection;
         }
 
         private void Jump()
         {
             // Debug.Log($"VelY: {VerticalVelocity}, Gravity: {MoveStats.Gravity}, Grounded: {_isGrounded}, Jumping: {_isJumping}");
             // Apply bounce logic first
-            if (_isBounced)
+            if (isBounced)
             {
                 // Let gravity start affecting bounce immediately
-                VerticalVelocity += MoveStats.Gravity * gravityDirection * Time.fixedDeltaTime * _bounceForce;
+                verticalVelocity += moveStats.Gravity * gravityDirection * Time.fixedDeltaTime * bounceForce;
 
                 // When bounce slows down, stop bouncing
-                if (VerticalVelocity <= 0f)
+                if (verticalVelocity <= 0f)
                 {
-                    if (!_isFalling)
+                    if (!isFalling)
                     {
-                        _isFalling = true;
+                        isFalling = true;
                     }
-                    _isBounced = false;
+                    isBounced = false;
                 }
 
-                _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, VerticalVelocity);
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, verticalVelocity);
                 return; // skip rest of Jump() this frame
             }
             //apply gravity while jumping
-            if (_isJumping)
+            if (isJumping)
             {
                 // when upward velocity runs out, stop being "jumping"
-                if (VerticalVelocity <= 0f)
+                if (verticalVelocity <= 0f)
                 {
-                    _isFalling = true;
+                    isFalling = true;
                 }
                 
                 //check for head bump
-                if (_bumpedHead)
+                if (bumpedHead)
                 {
-                    _isFalling = true;
+                    isFalling = true;
                 }
                 
-                if (VerticalVelocity >= 0f)
+                if (verticalVelocity >= 0f)
                 {
-                        VerticalVelocity += MoveStats.Gravity * gravityDirection * Time.fixedDeltaTime;
+                        verticalVelocity += moveStats.Gravity * gravityDirection * Time.fixedDeltaTime;
                 }
                 
                 //gravity on descending
-                else if (VerticalVelocity <= 0f)
+                else if (verticalVelocity <= 0f)
                 {
-                    if (!_isFalling)
+                    if (!isFalling)
                     {
-                        _isFalling = true;
+                        isFalling = true;
                     }
                 }
             }
             
             //normal gravity while falling
-            if (!_isGrounded && _isFalling)
+            if (!isGrounded && isFalling)
             {
-                VerticalVelocity += MoveStats.Gravity * gravityDirection * Time.fixedDeltaTime;
+                verticalVelocity += moveStats.Gravity * gravityDirection * Time.fixedDeltaTime;
             }
             
             // Clamp fall speed depending on gravity direction
             if (gravityDirection == 1)
             {
                 // Normal gravity: fall downward (negative Y)
-                VerticalVelocity = Mathf.Clamp(VerticalVelocity, -MoveStats.MaxFallSpeed, 50f);
+                verticalVelocity = Mathf.Clamp(verticalVelocity, -moveStats.MaxFallSpeed, 50f);
             }
             else
             {
                 // Inverted gravity: fall upward (positive Y)
-                VerticalVelocity = Mathf.Clamp(VerticalVelocity, -50f, MoveStats.MaxFallSpeed);
+                verticalVelocity = Mathf.Clamp(verticalVelocity, -50f, moveStats.MaxFallSpeed);
             }
             
-            _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, VerticalVelocity); 
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, verticalVelocity); 
         }
         
         #endregion
@@ -267,37 +267,37 @@ namespace Movement
         {
             // Pick origin based on gravity direction
             float yOrigin = (gravityDirection == 1) 
-                ? _feetColl.bounds.min.y      // bottom for normal gravity
-                : _feetColl.bounds.max.y;     // top for inverted gravity
+                ? feetColl.bounds.min.y      // bottom for normal gravity
+                : feetColl.bounds.max.y;     // top for inverted gravity
     
-            Vector2 boxCastOrigin = new Vector2(_feetColl.bounds.center.x, yOrigin);
-            Vector2 boxCastSize = new Vector2(_bodyColl.bounds.size.x, MoveStats.GroundDetectionRayLength);
+            Vector2 boxCastOrigin = new Vector2(feetColl.bounds.center.x, yOrigin);
+            Vector2 boxCastSize = new Vector2(bodyColl.bounds.size.x, moveStats.GroundDetectionRayLength);
 
             // Cast in direction of "gravity down"
             Vector2 castDir = (gravityDirection == 1) ? Vector2.down : Vector2.up;
 
-            _groundHit = Physics2D.BoxCast(boxCastOrigin, boxCastSize, 0f, castDir, MoveStats.GroundDetectionRayLength, MoveStats.GroundLayer);
+            groundHit = Physics2D.BoxCast(boxCastOrigin, boxCastSize, 0f, castDir, moveStats.GroundDetectionRayLength, moveStats.GroundLayer);
             
-            if (_groundHit.collider != null)
+            if (groundHit.collider != null)
             {
-                _isGrounded = true;
+                isGrounded = true;
             }
-            else { _isGrounded = false; }
+            else { isGrounded = false; }
             
             #region Debug Visualization
 
-            if (MoveStats.DebugShowIsGroundedBox)
+            if (moveStats.DebugShowIsGroundedBox)
             {
                 Color rayColor;
-                if (_isGrounded)
+                if (isGrounded)
                 {
                     rayColor = Color.green;
                 }
                 else {rayColor = Color.red;}
                 
-                Debug.DrawRay(new Vector2(boxCastOrigin.x - boxCastSize.x / 2, boxCastOrigin.y), Vector2.down * MoveStats.GroundDetectionRayLength, rayColor);
-                Debug.DrawRay(new Vector2(boxCastOrigin.x + boxCastSize.x / 2, boxCastOrigin.y), Vector2.down * MoveStats.GroundDetectionRayLength, rayColor);
-                Debug.DrawRay(new Vector2(boxCastOrigin.x - boxCastSize.x / 2, boxCastOrigin.y - MoveStats.GroundDetectionRayLength), Vector2.right * boxCastSize.x, rayColor);
+                Debug.DrawRay(new Vector2(boxCastOrigin.x - boxCastSize.x / 2, boxCastOrigin.y), Vector2.down * moveStats.GroundDetectionRayLength, rayColor);
+                Debug.DrawRay(new Vector2(boxCastOrigin.x + boxCastSize.x / 2, boxCastOrigin.y), Vector2.down * moveStats.GroundDetectionRayLength, rayColor);
+                Debug.DrawRay(new Vector2(boxCastOrigin.x - boxCastSize.x / 2, boxCastOrigin.y - moveStats.GroundDetectionRayLength), Vector2.right * boxCastSize.x, rayColor);
             }
             
             #endregion
@@ -308,39 +308,39 @@ namespace Movement
         {
             // Opposite of grounded: check "against" gravity
             float yOrigin = (gravityDirection == 1)
-                ? _bodyColl.bounds.max.y      // top for normal gravity
-                : _feetColl.bounds.min.y;     // bottom for inverted gravity
+                ? bodyColl.bounds.max.y      // top for normal gravity
+                : feetColl.bounds.min.y;     // bottom for inverted gravity
 
-            Vector2 boxCastOrigin = new Vector2(_feetColl.bounds.center.x, yOrigin);
-            Vector2 boxCastSize = new Vector2(_bodyColl.bounds.size.x * MoveStats.HeadWidth, MoveStats.HeadDetectionRayLength);
+            Vector2 boxCastOrigin = new Vector2(feetColl.bounds.center.x, yOrigin);
+            Vector2 boxCastSize = new Vector2(bodyColl.bounds.size.x * moveStats.HeadWidth, moveStats.HeadDetectionRayLength);
 
             // Cast opposite gravity
             Vector2 castDir = (gravityDirection == 1) ? Vector2.up : Vector2.down;
 
-            _headHit = Physics2D.BoxCast(boxCastOrigin, boxCastSize, 0f, castDir, MoveStats.HeadDetectionRayLength, MoveStats.GroundLayer);
+            headHit = Physics2D.BoxCast(boxCastOrigin, boxCastSize, 0f, castDir, moveStats.HeadDetectionRayLength, moveStats.GroundLayer);
             
-            if (_headHit.collider != null)
+            if (headHit.collider != null)
             {
-                _bumpedHead = true;
+                bumpedHead = true;
             }
-            else { _bumpedHead = false; }
+            else { bumpedHead = false; }
             
             #region Debug Visualization
 
-            if (MoveStats.DebugShowHeadBumpBox)
+            if (moveStats.DebugShowHeadBumpBox)
             {
-                float headWidth = MoveStats.HeadWidth;
+                float headWidth = moveStats.HeadWidth;
                 
                 Color rayColor;
-                if (_bumpedHead)
+                if (bumpedHead)
                 {
                     rayColor = Color.green;
                 }
                 else {rayColor = Color.red;}
                 
-                Debug.DrawRay(new Vector2(boxCastOrigin.x - boxCastSize.x / 2 * headWidth, boxCastOrigin.y), Vector2.up * MoveStats.HeadDetectionRayLength, rayColor);
-                Debug.DrawRay(new Vector2(boxCastOrigin.x + boxCastSize.x / 2 * headWidth, boxCastOrigin.y), Vector2.up * MoveStats.HeadDetectionRayLength, rayColor);
-                Debug.DrawRay(new Vector2(boxCastOrigin.x - boxCastSize.x / 2 * headWidth, boxCastOrigin.y + MoveStats.HeadDetectionRayLength), Vector2.right * boxCastSize.x * headWidth, rayColor);
+                Debug.DrawRay(new Vector2(boxCastOrigin.x - boxCastSize.x / 2 * headWidth, boxCastOrigin.y), Vector2.up * moveStats.HeadDetectionRayLength, rayColor);
+                Debug.DrawRay(new Vector2(boxCastOrigin.x + boxCastSize.x / 2 * headWidth, boxCastOrigin.y), Vector2.up * moveStats.HeadDetectionRayLength, rayColor);
+                Debug.DrawRay(new Vector2(boxCastOrigin.x - boxCastSize.x / 2 * headWidth, boxCastOrigin.y + moveStats.HeadDetectionRayLength), Vector2.right * boxCastSize.x * headWidth, rayColor);
             }
             
             #endregion
@@ -357,15 +357,15 @@ namespace Movement
 
         private void CountTimers()
         {
-            _jumpBufferTimer -= Time.deltaTime;
+            jumpBufferTimer -= Time.deltaTime;
 
-            if (!_isGrounded)
+            if (!isGrounded)
             {
-                _coyoteTimer -= Time.deltaTime;
+                coyoteTimer -= Time.deltaTime;
             }
             else
             {
-                _coyoteTimer = MoveStats.JumpCoyoteTime; 
+                coyoteTimer = moveStats.JumpCoyoteTime; 
             }
         }
         
@@ -383,36 +383,36 @@ namespace Movement
             transform.rotation = Quaternion.identity;
 
             // Core physics reset 
-            _rb.linearVelocity = Vector2.zero;
-            VerticalVelocity = 0f;
+            rb.linearVelocity = Vector2.zero;
+            verticalVelocity = 0f;
 
             // Movement state reset
-            _isJumping = false;
-            _isFalling = false;
-            _isBounced = false;
-            _numberOfJumpsUsed = 0;
-            _jumpBufferTimer = 0f;
-            _coyoteTimer = 0f;
+            isJumping = false;
+            isFalling = false;
+            isBounced = false;
+            numberOfJumpsUsed = 0;
+            jumpBufferTimer = 0f;
+            coyoteTimer = 0f;
 
             // Force grounded reset if you spawn on a platform
-            _isGrounded = true;
+            isGrounded = true;
 
             DebugLogger.Log(LogChannel.Gameplay, 
-                $"Gravity reset. Direction={gravityDirection}, VerticalVelocity={VerticalVelocity}, " +
-                $"Grounded={_isGrounded}, Jumping={_isJumping}", 
+                $"Gravity reset. Direction={gravityDirection}, VerticalVelocity={verticalVelocity}, " +
+                $"Grounded={isGrounded}, Jumping={isJumping}", 
                 LogLevel.Info);
         }
         
         public void Bounce(float bounceStrength)
         {
             // Start bounce with upward velocity
-            VerticalVelocity = bounceStrength * -gravityDirection;
-            _bounceForce = bounceStrength * -gravityDirection;
-            _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, VerticalVelocity);
-            _isBounced = true;
-            _isJumping = false; // Not a normal jump
-            _isFalling = false;
-            _isGrounded = false;
+            verticalVelocity = bounceStrength * -gravityDirection;
+            bounceForce = bounceStrength * -gravityDirection;
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, verticalVelocity);
+            isBounced = true;
+            isJumping = false; // Not a normal jump
+            isFalling = false;
+            isGrounded = false;
             
             InitiateJump(1); // trigger jump state immediately
             StartCoroutine(BounceCooldown());
@@ -421,7 +421,7 @@ namespace Movement
         private IEnumerator BounceCooldown()
         {
             yield return new WaitForSeconds(.05f);
-            _isBounced = false;
+            isBounced = false;
         }
     }
 }

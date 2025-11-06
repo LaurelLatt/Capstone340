@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     public void LoadLevel(int index)
     {
         StartCoroutine(LoadLevelAsync(allLevels[index]));
+        currentLevelIndex = index;
     }
     
     private IEnumerator LoadLevelAsync(LevelSettings settings)
@@ -61,6 +62,7 @@ public class GameManager : MonoBehaviour
 
     public void OnLevelComplete()
     {
+        SaveSystem.UnlockLevel(currentLevelIndex + 1);
         gameScreen.GoToResults();
     }
 }

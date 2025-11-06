@@ -91,6 +91,7 @@ GameObject:
   - component: {fileID: 3950790655896680499}
   - component: {fileID: 117998901427315468}
   - component: {fileID: 4399335236912678244}
+  - component: {fileID: -8183313246796414014}
   m_Layer: 5
   m_Name: LevelButton
   m_TagString: Untagged
@@ -200,10 +201,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SelectScreenController, Assembly-CSharp
-        m_MethodName: OnLevelSelected
-        m_Mode: 3
+      - m_Target: {fileID: -8183313246796414014}
+        m_TargetAssemblyTypeName: LevelButton, Assembly-CSharp
+        m_MethodName: OnButtonPressed
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -212,3 +213,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &-8183313246796414014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6803314500979803812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b7bbe68c9420465592ece4c1e198694, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelButton
+  levelIndex: 0
+  button: {fileID: 4399335236912678244}
+  selectScreenController: {fileID: 0}

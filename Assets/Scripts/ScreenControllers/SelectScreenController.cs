@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ScreenControllers
@@ -5,7 +6,8 @@ namespace ScreenControllers
     public class SelectScreenController : MonoBehaviour
     {
         public UIScreenManager uiScreenManager;
-        public LevelManager levelManager;
+        [SerializeField] private List<LevelButton> levelButtons;
+        
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
@@ -24,6 +26,14 @@ namespace ScreenControllers
         public void GoToOptionsMenu()
         {
             uiScreenManager.ShowOptionsScreen();
+        }
+
+        public void RefreshButtons()
+        {
+            foreach (LevelButton button in levelButtons)
+            {
+                button.Refresh();
+            }
         }
     }
 }
