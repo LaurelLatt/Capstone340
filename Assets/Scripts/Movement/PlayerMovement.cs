@@ -375,6 +375,11 @@ namespace Movement
         {
             gravityDirection *= -1;
             transform.rotation *= Quaternion.Euler(0f, 0f, 180f);
+            
+            // always unground and zero vertical velocity
+            isGrounded = false;
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
+            isFalling = true;
         }
 
         public void ResetMovement()

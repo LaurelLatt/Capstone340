@@ -5597,8 +5597,29 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4858740454131289218, guid: c6803f966ad454583a691d8ba1daabd1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 942785052}
   m_SourcePrefab: {fileID: 100100000, guid: c6803f966ad454583a691d8ba1daabd1, type: 3}
+--- !u!1 &942785051 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4858740454131289218, guid: c6803f966ad454583a691d8ba1daabd1, type: 3}
+  m_PrefabInstance: {fileID: 942785050}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &942785052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 942785051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93d926bd3345c4fdb9874df27e922965, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GravityInverters.GravityInverter
+  flipOnEnter: 1
 --- !u!1 &951562713
 GameObject:
   m_ObjectHideFlags: 0
@@ -5848,8 +5869,29 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4858740454131289218, guid: c6803f966ad454583a691d8ba1daabd1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1096455461}
   m_SourcePrefab: {fileID: 100100000, guid: c6803f966ad454583a691d8ba1daabd1, type: 3}
+--- !u!1 &1096455460 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4858740454131289218, guid: c6803f966ad454583a691d8ba1daabd1, type: 3}
+  m_PrefabInstance: {fileID: 1096455459}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1096455461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1096455460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93d926bd3345c4fdb9874df27e922965, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GravityInverters.GravityInverter
+  flipOnEnter: 1
 --- !u!1 &1207430152
 GameObject:
   m_ObjectHideFlags: 0
