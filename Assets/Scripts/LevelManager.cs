@@ -3,13 +3,9 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    [Header("Scene References")]
-    [SerializeField] private Vector3 playerSpawn;
-
-    [Header("Collectibles")]
-    [SerializeField] private bool hasCollectibles;
-    [SerializeField] private int totalCollectibles;
-
+    private Vector3 playerSpawn;
+    private bool hasCollectibles;
+    private int totalCollectibles;
     private LevelSettings levelSettings;
     private int collectedItems;
 
@@ -129,7 +125,7 @@ public class LevelManager : MonoBehaviour
             LevelComplete();
     }
 
-    private void LevelComplete()
+    public void LevelComplete()
     {
         DebugLogger.Log(LogChannel.Gameplay, "Level Complete!");
         GameManager.Instance.OnLevelComplete();

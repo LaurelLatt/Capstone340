@@ -4888,7 +4888,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2440254157891054748, guid: e22d2a7927fe84f7bb766bc4a6846dae, type: 3}
       propertyPath: flipHeight
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2695015859727463677, guid: e22d2a7927fe84f7bb766bc4a6846dae, type: 3}
       propertyPath: m_LocalPosition.x
