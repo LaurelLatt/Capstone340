@@ -372,6 +372,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1336912157}
+        m_TargetAssemblyTypeName: Audio.ButtonAudio, Assembly-CSharp
+        m_MethodName: PlayButtonSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &151492764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -496,6 +508,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1634076886}
         m_TargetAssemblyTypeName: ScreenControllers.OptionsScreenController, Assembly-CSharp
         m_MethodName: QuitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1336912157}
+        m_TargetAssemblyTypeName: Audio.ButtonAudio, Assembly-CSharp
+        m_MethodName: PlayButtonSound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -915,6 +939,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1748232629}
         m_TargetAssemblyTypeName: GameScreenController, Assembly-CSharp
         m_MethodName: ShowPauseMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1336912157}
+        m_TargetAssemblyTypeName: Audio.ButtonAudio, Assembly-CSharp
+        m_MethodName: PlayButtonSound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2000,6 +2036,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1336912157}
+        m_TargetAssemblyTypeName: Audio.ButtonAudio, Assembly-CSharp
+        m_MethodName: PlayButtonSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &406778869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2660,6 +2708,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4399335236912678244, guid: e94033d5dd2804067839f51183dccdbf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4399335236912678244, guid: e94033d5dd2804067839f51183dccdbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4399335236912678244, guid: e94033d5dd2804067839f51183dccdbf, type: 3}
@@ -2667,12 +2719,28 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1832181231}
     - target: {fileID: 4399335236912678244, guid: e94033d5dd2804067839f51183dccdbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1336912157}
+    - target: {fileID: 4399335236912678244, guid: e94033d5dd2804067839f51183dccdbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4399335236912678244, guid: e94033d5dd2804067839f51183dccdbf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OnButtonPressed
       objectReference: {fileID: 0}
     - target: {fileID: 4399335236912678244, guid: e94033d5dd2804067839f51183dccdbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: PlayButtonSound
+      objectReference: {fileID: 0}
+    - target: {fileID: 4399335236912678244, guid: e94033d5dd2804067839f51183dccdbf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: LevelButton, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4399335236912678244, guid: e94033d5dd2804067839f51183dccdbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: Audio.ButtonAudio, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4399335236912678244, guid: e94033d5dd2804067839f51183dccdbf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
@@ -2680,6 +2748,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4399335236912678244, guid: e94033d5dd2804067839f51183dccdbf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4399335236912678244, guid: e94033d5dd2804067839f51183dccdbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6803314500979803812, guid: e94033d5dd2804067839f51183dccdbf, type: 3}
@@ -3087,6 +3159,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1336912157}
+        m_TargetAssemblyTypeName: Audio.ButtonAudio, Assembly-CSharp
+        m_MethodName: PlayButtonSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1039099670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3147,6 +3231,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4399335236912678244, guid: e94033d5dd2804067839f51183dccdbf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4399335236912678244, guid: e94033d5dd2804067839f51183dccdbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4399335236912678244, guid: e94033d5dd2804067839f51183dccdbf, type: 3}
@@ -3154,12 +3242,28 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1039895802}
     - target: {fileID: 4399335236912678244, guid: e94033d5dd2804067839f51183dccdbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1336912157}
+    - target: {fileID: 4399335236912678244, guid: e94033d5dd2804067839f51183dccdbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4399335236912678244, guid: e94033d5dd2804067839f51183dccdbf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OnButtonPressed
       objectReference: {fileID: 0}
     - target: {fileID: 4399335236912678244, guid: e94033d5dd2804067839f51183dccdbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: PlayButtonSound
+      objectReference: {fileID: 0}
+    - target: {fileID: 4399335236912678244, guid: e94033d5dd2804067839f51183dccdbf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: LevelButton, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4399335236912678244, guid: e94033d5dd2804067839f51183dccdbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: Audio.ButtonAudio, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4399335236912678244, guid: e94033d5dd2804067839f51183dccdbf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
@@ -3167,6 +3271,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4399335236912678244, guid: e94033d5dd2804067839f51183dccdbf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4399335236912678244, guid: e94033d5dd2804067839f51183dccdbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6803314500979803812, guid: e94033d5dd2804067839f51183dccdbf, type: 3}
@@ -3665,6 +3773,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1336912157}
+        m_TargetAssemblyTypeName: Audio.ButtonAudio, Assembly-CSharp
+        m_MethodName: PlayButtonSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1333927470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3713,6 +3833,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1336912156}
   - component: {fileID: 1336912155}
+  - component: {fileID: 1336912157}
+  - component: {fileID: 1336912158}
   m_Layer: 0
   m_Name: Audio Source
   m_TagString: Untagged
@@ -3733,7 +3855,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.25
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -3832,6 +3954,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1336912157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1336912154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3df319df869a948d8b82d616be8b9df1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Audio.ButtonAudio
+  buttonSounds:
+  - {fileID: 8300000, guid: a74784850066c4a5bb422465a1aab85e, type: 3}
+  - {fileID: 8300000, guid: ff0505fa143ea4025807159081b8c294, type: 3}
+  - {fileID: 8300000, guid: 6b1afc8d047a14b288056b8621a5f10e, type: 3}
+  - {fileID: 8300000, guid: 212ecb44b5bc84c78b120bbe0ebe7858, type: 3}
+  - {fileID: 8300000, guid: 33da3539155ed427f9be7dee979f2ef8, type: 3}
+  - {fileID: 8300000, guid: 0357b7afbb583443b91728113fb8b472, type: 3}
+--- !u!114 &1336912158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1336912154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f55cfeadb6d194c08ad60b4da72fdc4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Audio.AudioManager
+  buttonAudioSource: {fileID: 1336912155}
 --- !u!1 &1387191145
 GameObject:
   m_ObjectHideFlags: 0
@@ -4253,6 +4407,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1336912157}
+        m_TargetAssemblyTypeName: Audio.ButtonAudio, Assembly-CSharp
+        m_MethodName: PlayButtonSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1545959526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4386,6 +4552,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1336912157}
+        m_TargetAssemblyTypeName: Audio.ButtonAudio, Assembly-CSharp
+        m_MethodName: PlayButtonSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1572264680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4438,6 +4616,10 @@ PrefabInstance:
       objectReference: {fileID: 713778529}
     - target: {fileID: 4399335236912678244, guid: e94033d5dd2804067839f51183dccdbf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4399335236912678244, guid: e94033d5dd2804067839f51183dccdbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4399335236912678244, guid: e94033d5dd2804067839f51183dccdbf, type: 3}
@@ -4445,12 +4627,28 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1676676169}
     - target: {fileID: 4399335236912678244, guid: e94033d5dd2804067839f51183dccdbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1336912157}
+    - target: {fileID: 4399335236912678244, guid: e94033d5dd2804067839f51183dccdbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4399335236912678244, guid: e94033d5dd2804067839f51183dccdbf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OnButtonPressed
       objectReference: {fileID: 0}
     - target: {fileID: 4399335236912678244, guid: e94033d5dd2804067839f51183dccdbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: PlayButtonSound
+      objectReference: {fileID: 0}
+    - target: {fileID: 4399335236912678244, guid: e94033d5dd2804067839f51183dccdbf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: LevelButton, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4399335236912678244, guid: e94033d5dd2804067839f51183dccdbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: Audio.ButtonAudio, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4399335236912678244, guid: e94033d5dd2804067839f51183dccdbf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
@@ -4458,6 +4656,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4399335236912678244, guid: e94033d5dd2804067839f51183dccdbf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4399335236912678244, guid: e94033d5dd2804067839f51183dccdbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6803314500979803812, guid: e94033d5dd2804067839f51183dccdbf, type: 3}
@@ -5353,7 +5555,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4399335236912678244, guid: e94033d5dd2804067839f51183dccdbf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4399335236912678244, guid: e94033d5dd2804067839f51183dccdbf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
@@ -5364,6 +5566,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1994269882}
     - target: {fileID: 4399335236912678244, guid: e94033d5dd2804067839f51183dccdbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1336912157}
+    - target: {fileID: 4399335236912678244, guid: e94033d5dd2804067839f51183dccdbf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
@@ -5372,12 +5578,16 @@ PrefabInstance:
       value: OnButtonPressed
       objectReference: {fileID: 0}
     - target: {fileID: 4399335236912678244, guid: e94033d5dd2804067839f51183dccdbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: PlayButtonSound
+      objectReference: {fileID: 0}
+    - target: {fileID: 4399335236912678244, guid: e94033d5dd2804067839f51183dccdbf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: LevelButton, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4399335236912678244, guid: e94033d5dd2804067839f51183dccdbf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: ScreenControllers.SelectScreenController, Assembly-CSharp
+      value: Audio.ButtonAudio, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4399335236912678244, guid: e94033d5dd2804067839f51183dccdbf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
@@ -5385,6 +5595,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4399335236912678244, guid: e94033d5dd2804067839f51183dccdbf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4399335236912678244, guid: e94033d5dd2804067839f51183dccdbf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6803314500979803812, guid: e94033d5dd2804067839f51183dccdbf, type: 3}
@@ -5771,6 +5985,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1336912157}
+        m_TargetAssemblyTypeName: Audio.ButtonAudio, Assembly-CSharp
+        m_MethodName: PlayButtonSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2048774599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5904,6 +6130,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1336912157}
+        m_TargetAssemblyTypeName: Audio.ButtonAudio, Assembly-CSharp
+        m_MethodName: PlayButtonSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2106972227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6028,6 +6266,18 @@ MonoBehaviour:
       - m_Target: {fileID: 271909837}
         m_TargetAssemblyTypeName: PauseScreenController, Assembly-CSharp
         m_MethodName: GoToOptionsMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1336912157}
+        m_TargetAssemblyTypeName: Audio.ButtonAudio, Assembly-CSharp
+        m_MethodName: PlayButtonSound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
