@@ -22,4 +22,8 @@ public class LevelSettings : ScriptableObject
     [Header("Player Settings")] 
     [Tooltip("This freezes the player for camera fade mechanic.")]
     public bool playerFreeze;
+
+    [Tooltip("This sets the bounds for the level. If player passes these points, they reset.")]
+    public float upperBound = 20f;
+    public float lowerBound = -10f;
 }

@@ -9,19 +9,22 @@ public class LevelManager : MonoBehaviour
     private int totalCollectibles;
     private LevelSettings levelSettings;
     private int collectedItems;
+    private PlayerController player;
 
     public void ApplySettings(LevelSettings settings)
     {
         levelSettings = settings;
         // Set up the player’s starting position
-        PlayerController player = GameManager.Instance.player;
+        player = GameManager.Instance.player;
         if (player != null)
         {
-            ResetSettings(player);
+            ResetSettings();
             
             Vector3 spawn = settings.spawnPosition;
             player.transform.position = spawn;
             playerSpawn = spawn;
+            
+            player.SetBounds(levelSettings.upperBound, levelSettings.lowerBound);
 
             // Apply gravity inversion or other toggles
             DebugLogger.Log(LogChannel.Gameplay, $"Height inversion enabled? {settings.heightInversionEnabled}");
@@ -86,8 +89,6 @@ public class LevelManager : MonoBehaviour
     {
         // Fallback setup if no ScriptableObject settings were provided
         if (GameManager.Instance == null) return;
-
-        var player = GameManager.Instance.player;
         
         player.transform.position = playerSpawn;
 
@@ -107,7 +108,6 @@ public class LevelManager : MonoBehaviour
             collectible.gameObject.SetActive(true);
         }
         
-        PlayerController player = FindFirstObjectByType<PlayerController>();
         if (player != null)
         {
             player.RespawnAt(playerSpawn);
@@ -144,7 +144,7 @@ public class LevelManager : MonoBehaviour
         GameManager.Instance.OnLevelComplete();
         
     }
-    private void ResetSettings(PlayerController player)
+    private void ResetSettings()
     {
         player.DisableHeightInversion();
         player.transform.position = Vector3.zero;

@@ -35,6 +35,22 @@ public class PlatformController : MonoBehaviour
 
     private void FlickerPlatform()
     {
+        StartCoroutine(FlickerThenDisable());
+    }
+    
+    private IEnumerator FlickerThenDisable()
+    {
+        // Quick warning flicker (e.g., 3 times)
+        for (int i = 0; i < 2; i++)
+        {
+            ChangePlatformOpacity(0.5f);   // dim
+            yield return new WaitForSeconds(0.1f);
+
+            ChangePlatformOpacity(1f);     // normal
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        // Now run your existing disable coroutine
         StartCoroutine(TempDisablePlatform());
     }
     
@@ -53,7 +69,7 @@ public class PlatformController : MonoBehaviour
         tilemapCollider.enabled = true;
         ChangePlatformOpacity(1f);
         yield return new WaitForSeconds(2f);
-        StartCoroutine(TempDisablePlatform());
+        StartCoroutine(FlickerThenDisable());
     }
     
     private void ChangePlatformOpacity(float opacity)

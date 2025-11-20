@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private HeightBasedGravityInverter gravityInverter;
     private PlayerMovement playerMovement;
+    private float upperBounds = 20f;
+    private float lowerBounds = -10f;
 
     public bool isFrozen { get; private set; } = false;
     
@@ -33,7 +35,7 @@ public class PlayerController : MonoBehaviour
 
     private void CheckForFalling()
     {
-        if (transform.position.y < -10 || transform.position.y > 20)
+        if (transform.position.y < lowerBounds || transform.position.y > upperBounds)
         {
             if (GameManager.Instance != null)
             {
@@ -81,6 +83,12 @@ public class PlayerController : MonoBehaviour
     {
         transform.position = position;
         ResetMovement();
+    }
+
+    public void SetBounds(float upperBounds, float lowerBounds)
+    {
+        this.upperBounds = upperBounds;
+        this.lowerBounds = lowerBounds;
     }
     
     

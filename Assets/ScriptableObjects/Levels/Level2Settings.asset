@@ -21,3 +21,5 @@ MonoBehaviour:
   hasCameraFade: 0
   fadeWaitTime: 4
   playerFreeze: 0
+  upperBound: 15
+  lowerBound: -10
