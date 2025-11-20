@@ -11,8 +11,8 @@ namespace Audio
         public AudioClip menuMusic;
         public AudioClip levelMusic;
         
-        private bool musicMuted = false;
-        private bool soundMuted = false;
+        public bool musicMuted { get; private set; }
+        public bool soundMuted { get; private set; }
     
         private void Awake()
         {
@@ -31,6 +31,7 @@ namespace Audio
                 Destroy(gameObject);
             }
             
+            LoadMusicSettings();
         }
 
         private void Start()
@@ -62,6 +63,7 @@ namespace Audio
         public void SetMusicVolume(float value)
         {
             musicSource.volume = value;
+            SaveMusicVolume();
         }
 
         public void ToggleMusic()
@@ -74,6 +76,7 @@ namespace Audio
             {
                 MuteMusic();
             }
+            SaveMusicMuteState();
         }
 
         private void MuteMusic()
@@ -98,6 +101,7 @@ namespace Audio
             {
                 MuteSound();
             }
+            SaveSoundMuteState();
         }
 
         private void MuteSound()
@@ -111,6 +115,32 @@ namespace Audio
             soundMuted = false;
             buttonAudioSource.mute = false;
         }
-    
+
+        private void LoadMusicSettings()
+        {
+            musicMuted = SaveSystem.LoadMusicMuteState();
+            musicSource.mute = musicMuted; // apply directly
+
+            soundMuted = SaveSystem.LoadSoundMuteState();
+            buttonAudioSource.mute = soundMuted; // apply directly
+
+            float volume = SaveSystem.LoadMusicVolume();
+            SetMusicVolume(volume);
+        }
+
+        private void SaveMusicMuteState()
+        {
+            SaveSystem.SaveMusicMuteState(musicMuted);
+        }
+
+        private void SaveSoundMuteState()
+        {
+            SaveSystem.SaveSoundMuteState(soundMuted);
+        }
+
+        private void SaveMusicVolume()
+        {
+            SaveSystem.SaveMusicVolume(musicSource.volume);
+        }
     }
 }

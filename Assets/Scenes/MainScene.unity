@@ -5563,8 +5563,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OptionsScreenController
   uiScreenManager: {fileID: 174061016}
+  audioManager: {fileID: 312902291}
   musicButtonImage: {fileID: 687157031}
   soundButtonImage: {fileID: 570427022}
+  volumeSlider: {fileID: 1676184859}
   musicOnSprite: {fileID: 21300000, guid: 75f0921966b5b4192bb0c39061ffd5fe, type: 3}
   musicOffSprite: {fileID: 21300000, guid: 2bcc00fc7759f4953ac6572dcf3f7c95, type: 3}
   soundOnSprite: {fileID: 21300000, guid: 04e3406829a654d8b8ec717a3bc2a95a, type: 3}
