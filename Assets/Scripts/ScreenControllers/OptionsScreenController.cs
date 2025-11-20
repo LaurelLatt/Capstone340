@@ -1,11 +1,21 @@
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace ScreenControllers
 {
     public class OptionsScreenController : MonoBehaviour
     {
         public UIScreenManager uiScreenManager;
+
+        public Image musicButtonImage;
+        public Image soundButtonImage;
+        
+        public Sprite musicOnSprite;
+        public Sprite musicOffSprite;
+        public Sprite soundOnSprite;
+        public Sprite soundOffSprite;
+        
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
@@ -37,6 +47,16 @@ namespace ScreenControllers
                 Application.Quit(); // For standalone builds
             #endif
             
+        }
+
+        public void SwapMusicSprite()
+        {
+            musicButtonImage.sprite = musicButtonImage.sprite == musicOnSprite ? musicOffSprite : musicOnSprite;
+        }
+
+        public void SwapSoundSprite()
+        {
+            soundButtonImage.sprite = soundButtonImage.sprite == soundOnSprite ? soundOffSprite : soundOnSprite;
         }
     }
 }

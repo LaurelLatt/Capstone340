@@ -4,7 +4,7 @@ namespace Audio
 {
     public class ButtonAudio : MonoBehaviour
     {
-        public AudioClip[] buttonSounds;
+        public AudioClip buttonSound;
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
@@ -19,8 +19,7 @@ namespace Audio
 
         public void PlayButtonSound()
         {
-            int index = Random.Range(0, buttonSounds.Length);
-            AudioManager.Instance.PlayButtonSound(buttonSounds[index]);
+            AudioManager.Instance.PlayButtonSound(buttonSound);
         }
     }
 }

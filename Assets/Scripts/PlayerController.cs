@@ -36,6 +36,10 @@ public class PlayerController : MonoBehaviour
         if (transform.position.y < -10 || transform.position.y > 20)
         {
             ResetPosition();
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.LevelReset();
+            }
         }
     }
 

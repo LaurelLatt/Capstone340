@@ -1,4 +1,5 @@
 using System.Collections;
+using Audio;
 using ScreenControllers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -33,15 +34,13 @@ public class GameManager : MonoBehaviour
     
     private IEnumerator LoadLevelAsync(LevelSettings settings)
     {
-        // Unload previous level if one is loaded
-        if (SceneManager.sceneCount > 1)
-        {
-            yield return SceneManager.UnloadSceneAsync(SceneManager.GetSceneAt(1));
-        }
-
+        
         // Load new level scene additively
         loadOperation = SceneManager.LoadSceneAsync(settings.levelName, LoadSceneMode.Additive);
         yield return loadOperation;
+        
+        // Switch to level music
+        AudioManager.Instance.PlayLevelMusic();
 
         // Apply settings once the scene is loaded
         Scene levelScene = SceneManager.GetSceneByName(settings.levelName);
@@ -52,6 +51,19 @@ public class GameManager : MonoBehaviour
         {
             levelManager.ApplySettings(settings);
         }
+        Time.timeScale = 1;
+    }
+    
+    public void UnloadLevelAsync()
+    {
+        // Unload the current level if one is loaded
+        if (SceneManager.sceneCount > 1)
+        {
+            SceneManager.UnloadSceneAsync(SceneManager.GetSceneAt(1));
+        }
+        Time.timeScale = 0;
+
+        AudioManager.Instance.PlayMenuMusic();
     }
 
     public void LevelReset()

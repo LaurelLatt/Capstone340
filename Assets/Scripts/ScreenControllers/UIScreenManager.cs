@@ -35,6 +35,7 @@ namespace ScreenControllers
         public void ShowSelectScreen()
         {
             selectScreenController.RefreshButtons();
+            GameManager.Instance.UnloadLevelAsync();
             ShowScreen(selectScreen);
         }
 
@@ -46,6 +47,7 @@ namespace ScreenControllers
         public void ShowResultsScreen()
         {
             ShowScreen(resultsScreen);
+            GameManager.Instance.UnloadLevelAsync();
         }
 
         public void ShowPauseScreen()
