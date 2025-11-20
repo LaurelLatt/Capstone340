@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MushroomBounce : MonoBehaviour
 {
-    public float bounceForce = 50f; // tweak in inspector
+    public float bounceForce = 2f; // tweak in inspector
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // Rigidbody2D rb = collision.rigidbody;

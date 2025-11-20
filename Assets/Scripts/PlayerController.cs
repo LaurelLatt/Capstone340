@@ -35,7 +35,6 @@ public class PlayerController : MonoBehaviour
     {
         if (transform.position.y < -10 || transform.position.y > 20)
         {
-            ResetPosition();
             if (GameManager.Instance != null)
             {
                 GameManager.Instance.LevelReset();
@@ -76,6 +75,12 @@ public class PlayerController : MonoBehaviour
         gravityInverter.IgnoreNextFrame();
         playerMovement.ResetMovement();
         gravityInverter.ResetState(false);
+    }
+    
+    public void RespawnAt(Vector2 position)
+    {
+        transform.position = position;
+        ResetMovement();
     }
     
     

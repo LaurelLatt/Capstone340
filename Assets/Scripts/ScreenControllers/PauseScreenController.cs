@@ -31,7 +31,6 @@ namespace ScreenControllers
         public void GoToSelectScreen()
         {
             uiScreenManager.ShowSelectScreen();
-            Time.timeScale = 1;
         }
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 
@@ -105,7 +106,12 @@ public class LevelManager : MonoBehaviour
         {
             collectible.gameObject.SetActive(true);
         }
-        GameManager.Instance.player.transform.position = playerSpawn;
+        
+        PlayerController player = FindFirstObjectByType<PlayerController>();
+        if (player != null)
+        {
+            player.RespawnAt(playerSpawn);
+        }
     }
 
     private void ResetCollectibles()
@@ -128,9 +134,16 @@ public class LevelManager : MonoBehaviour
     public void LevelComplete()
     {
         DebugLogger.Log(LogChannel.Gameplay, "Level Complete!");
-        GameManager.Instance.OnLevelComplete();
+        
+        StartCoroutine(LevelCompleteRoutine());
     }
 
+    private IEnumerator LevelCompleteRoutine()
+    {
+        yield return new WaitForSeconds(1f);
+        GameManager.Instance.OnLevelComplete();
+        
+    }
     private void ResetSettings(PlayerController player)
     {
         player.DisableHeightInversion();

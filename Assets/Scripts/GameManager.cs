@@ -12,8 +12,11 @@ public class GameManager : MonoBehaviour
     public LevelSettings[] allLevels;
     public CameraFade cameraFade;
 
+    public LevelManager LevelManager { get; private set; }
+    
     private int currentLevelIndex = 0;
     private AsyncOperation loadOperation;
+
 
     private void Awake()
     {
@@ -46,12 +49,12 @@ public class GameManager : MonoBehaviour
         Scene levelScene = SceneManager.GetSceneByName(settings.levelName);
         SceneManager.SetActiveScene(levelScene);
 
-        LevelManager levelManager = FindFirstObjectByType<LevelManager>();
-        if (levelManager != null)
+        LevelManager = FindFirstObjectByType<LevelManager>();
+        if (LevelManager != null)
         {
-            levelManager.ApplySettings(settings);
+            LevelManager.ApplySettings(settings);
         }
-        Time.timeScale = 1;
+        StartGame();
     }
     
     public void UnloadLevelAsync()
@@ -68,13 +71,30 @@ public class GameManager : MonoBehaviour
 
     public void LevelReset()
     {
-        LevelManager levelManager = FindFirstObjectByType<LevelManager>();
-        levelManager.LevelReset();
+        if (LevelManager != null)
+        {
+            LevelManager.LevelReset();
+        }
+        else
+        {
+            DebugLogger.Log(LogChannel.Persistence, "LevelManager not found during LevelReset()", LogLevel.Warning);
+        }
     }
 
     public void OnLevelComplete()
     {
         SaveSystem.UnlockLevel(currentLevelIndex + 1);
+        StopGame();
         gameScreen.GoToResults();
+    }
+
+    public void StopGame()
+    {
+        Time.timeScale = 0;
+    }
+
+    public void StartGame()
+    {
+        Time.timeScale = 1;
     }
 }
