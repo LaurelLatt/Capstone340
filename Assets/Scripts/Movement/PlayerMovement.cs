@@ -54,9 +54,14 @@ namespace Movement
             rb = GetComponent<Rigidbody2D>();
             playerController = GetComponent<PlayerController>();
         }
+        
 
         private void Update()
         {
+            // Debug.Log("Y vel: " + rb.linearVelocity.y + " | Gravity: " + rb.gravityScale + " | Simulated: " + rb.simulated);
+            // DebugLogger.Log(LogChannel.Gameplay, 
+            //     $"Direction={gravityDirection}, VerticalVelocity={verticalVelocity}, Grounded={isGrounded}, Falling={isFalling}, Jumping={isJumping}", 
+            //     LogLevel.Info);
             CountTimers();
             JumpChecks();
         }
@@ -94,7 +99,7 @@ namespace Movement
                     acceleration *= 0.5f;            // slower acceleration for smoother control
                 }
 
-                targetVelocity = new Vector2(moveInput.x, 0f) * baseSpeed;
+                targetVelocity = new Vector2(moveInput.x * baseSpeed, rb.linearVelocity.y);
 
                 moveVelocity = Vector2.Lerp(moveVelocity, targetVelocity, acceleration * Time.fixedDeltaTime);
 
@@ -389,7 +394,7 @@ namespace Movement
 
             // Core physics reset 
             rb.linearVelocity = Vector2.zero;
-            verticalVelocity = 0f;
+            verticalVelocity = moveStats.Gravity * gravityDirection;
 
             // Movement state reset
             isJumping = false;

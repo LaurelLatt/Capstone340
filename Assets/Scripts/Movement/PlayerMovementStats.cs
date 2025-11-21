@@ -75,6 +75,7 @@ namespace Movement
             // check these two for gravity direction correctness
             Gravity = -(2f * AdjustedJumpHeight) / Mathf.Pow(TimeTillJumpApex, 2);
             InitialJumpVelocity = Mathf.Abs(Gravity) * TimeTillJumpApex;
+            Debug.Log($"JumpHeight: {JumpHeight}, CompFactor: {JumpHeightCompensationFactor}, TimeApex: {TimeTillJumpApex}, GravityCalc: {Gravity}");
         }
         
     }

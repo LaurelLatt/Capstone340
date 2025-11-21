@@ -9,8 +9,12 @@ public class LevelSettings : ScriptableObject
     
     [Header("Collectible Items")]
     public bool hasCollectibles;
-    public int totalCollectibles;
-    public bool collectiblesAsWinCondition;
+    [Tooltip("Number of collectibles needed to pass level.")]
+    public int goalCollectibles;
+    [Tooltip("Check if collectibles are only necessary win condition")]
+    public bool collectiblesAsOnlyWinCondition;
+    [Tooltip("Check if there is another win condition, too.")]
+    public bool collectiblesAsAWinCondition;
     
     [Header("Gravity Settings")]
     public bool heightInversionEnabled;

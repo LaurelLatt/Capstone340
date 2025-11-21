@@ -12,12 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4d016343db644f42beb4552f3b5ed0d, type: 3}
   m_Name: Level4Settings
   m_EditorClassIdentifier: Assembly-CSharp::LevelSettings
-  spawnPosition: {x: 0, y: -0.35, z: 0}
+  spawnPosition: {x: -5, y: 7.8, z: 0}
   levelName: Level4
   hasCollectibles: 1
-  totalCollectibles: 5
-  collectiblesAsWinCondition: 1
+  goalCollectibles: 2
+  collectiblesAsOnlyWinCondition: 0
+  collectiblesAsAWinCondition: 1
   heightInversionEnabled: 0
-  hasCameraFade: 1
+  hasCameraFade: 0
   fadeWaitTime: 4
-  playerFreeze: 1
+  playerFreeze: 0
+  upperBound: 40
+  lowerBound: -20

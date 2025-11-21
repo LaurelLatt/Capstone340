@@ -6,7 +6,7 @@ public class LevelManager : MonoBehaviour
 {
     private Vector3 playerSpawn;
     private bool hasCollectibles;
-    private int totalCollectibles;
+    private int goalCollectibles;
     private LevelSettings levelSettings;
     private int collectedItems;
     private PlayerController player;
@@ -42,7 +42,7 @@ public class LevelManager : MonoBehaviour
         if (settings.hasCollectibles)
         {
             hasCollectibles = true;
-            totalCollectibles = settings.totalCollectibles;
+            goalCollectibles = settings.goalCollectibles;
             ResetCollectibles();
             GameManager.Instance.gameScreen.ShowCollectedText();
             
@@ -113,6 +113,8 @@ public class LevelManager : MonoBehaviour
             player.RespawnAt(playerSpawn);
         }
     }
+    
+    
 
     private void ResetCollectibles()
     {
@@ -127,15 +129,36 @@ public class LevelManager : MonoBehaviour
         collectedItems++;
         GameManager.Instance.gameScreen.UpdateCollectibleUI(collectedItems);
 
-        if (collectedItems >= totalCollectibles && levelSettings.collectiblesAsWinCondition)
+        if (collectedItems >= goalCollectibles && levelSettings.collectiblesAsOnlyWinCondition)
             LevelComplete();
     }
 
+    private bool CheckCollectibleGoalComplete()
+    {
+        if (collectedItems >= goalCollectibles)
+        {
+            return true;
+        }
+        return false;
+    }
+    
+
     public void LevelComplete()
     {
-        DebugLogger.Log(LogChannel.Gameplay, "Level Complete!");
+        if (levelSettings.collectiblesAsAWinCondition)
+        {
+            bool goalComplete = CheckCollectibleGoalComplete();
+            if (goalComplete)
+            {
+                DebugLogger.Log(LogChannel.Gameplay, "Level Complete!");
+                StartCoroutine(LevelCompleteRoutine());
+            }
+        }
+        else {
+            DebugLogger.Log(LogChannel.Gameplay, "Level Complete!");
+            StartCoroutine(LevelCompleteRoutine());
+        }
         
-        StartCoroutine(LevelCompleteRoutine());
     }
 
     private IEnumerator LevelCompleteRoutine()
