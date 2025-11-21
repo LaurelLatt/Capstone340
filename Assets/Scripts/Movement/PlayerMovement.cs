@@ -68,6 +68,7 @@ namespace Movement
 
         private void FixedUpdate()
         {
+            Debug.Log("velX: " + rb.linearVelocity.x + " | moveInput: " + InputManager.Movement.x + " | grounded: " + isGrounded);
             CollisionChecks();
             Jump();
             if (isGrounded)
@@ -85,6 +86,15 @@ namespace Movement
         
         private void Move(float acceleration, float deceleration, Vector2 moveInput)
         {
+            float rawX = moveInput.x;
+
+            // Kill tiny input noise
+            if (Mathf.Abs(rawX) < 0.1f)
+                rawX = 0f;
+
+            // Replace moveInput.x with cleaned value
+            moveInput.x = rawX;
+            
             if (moveInput != Vector2.zero)
             {
                 Vector2 targetVelocity;
@@ -114,7 +124,12 @@ namespace Movement
             }
             else
             {
-                moveVelocity = Vector2.Lerp(moveVelocity, Vector2.zero, deceleration * Time.fixedDeltaTime);
+                moveVelocity.x = Mathf.MoveTowards(moveVelocity.x, 0f, deceleration * Time.fixedDeltaTime);
+
+                Debug.Log($"[DECEL] moveVel.x: {moveVelocity.x} | rbVel.x: {rb.linearVelocity.x} | grounded: {isGrounded}");
+                // if (Mathf.Abs(moveVelocity.x) < 0.001f)
+                //     moveVelocity.x = 0f;
+
                 rb.linearVelocity = new Vector2(moveVelocity.x, rb.linearVelocity.y);
             }
         }

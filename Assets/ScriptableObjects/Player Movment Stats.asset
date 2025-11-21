@@ -22,8 +22,8 @@ MonoBehaviour:
   GroundLayer:
     serializedVersion: 2
     m_Bits: 512
-  GroundDetectionRayLength: 0.02
-  HeadDetectionRayLength: 0.02
+  GroundDetectionRayLength: 0.12
+  HeadDetectionRayLength: 0.1
   HeadWidth: 0.75
   JumpHeight: 3
   JumpHeightCompensationFactor: 1.054

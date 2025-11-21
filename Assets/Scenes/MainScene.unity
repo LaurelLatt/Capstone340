@@ -6195,6 +6195,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 43299665556143450, guid: e22d2a7927fe84f7bb766bc4a6846dae, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 2088788500881456193, guid: e22d2a7927fe84f7bb766bc4a6846dae, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -6257,7 +6261,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3395313970545248676, guid: e22d2a7927fe84f7bb766bc4a6846dae, type: 3}
       propertyPath: m_Name
-      value: LEGO Fairy Batman Standing
+      value: Lego Fairy Batman
       objectReference: {fileID: 0}
     - target: {fileID: 3395313970545248676, guid: e22d2a7927fe84f7bb766bc4a6846dae, type: 3}
       propertyPath: m_Layer
@@ -6270,6 +6274,10 @@ PrefabInstance:
     - target: {fileID: 3945666554408700734, guid: e22d2a7927fe84f7bb766bc4a6846dae, type: 3}
       propertyPath: m_Size.y
       value: 0.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945666554408700734, guid: e22d2a7927fe84f7bb766bc4a6846dae, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3945666554408700734, guid: e22d2a7927fe84f7bb766bc4a6846dae, type: 3}
       propertyPath: m_Material
@@ -6295,6 +6303,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 6150082716194581031, guid: e22d2a7927fe84f7bb766bc4a6846dae, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 6154573096377528263, guid: e22d2a7927fe84f7bb766bc4a6846dae, type: 3}
       propertyPath: m_Size.x
       value: 1.29
@@ -6302,6 +6314,10 @@ PrefabInstance:
     - target: {fileID: 6154573096377528263, guid: e22d2a7927fe84f7bb766bc4a6846dae, type: 3}
       propertyPath: m_Size.y
       value: 1.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 6154573096377528263, guid: e22d2a7927fe84f7bb766bc4a6846dae, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6154573096377528263, guid: e22d2a7927fe84f7bb766bc4a6846dae, type: 3}
       propertyPath: m_Material
@@ -6319,6 +6335,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 6483711117328799136, guid: e22d2a7927fe84f7bb766bc4a6846dae, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 8805631690557120493, guid: e22d2a7927fe84f7bb766bc4a6846dae, type: 3}
       propertyPath: m_Size.x
       value: 1.29
@@ -6326,6 +6346,10 @@ PrefabInstance:
     - target: {fileID: 8805631690557120493, guid: e22d2a7927fe84f7bb766bc4a6846dae, type: 3}
       propertyPath: m_Size.y
       value: 1.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 8805631690557120493, guid: e22d2a7927fe84f7bb766bc4a6846dae, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8805631690557120493, guid: e22d2a7927fe84f7bb766bc4a6846dae, type: 3}
       propertyPath: m_Material

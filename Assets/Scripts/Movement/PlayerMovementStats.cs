@@ -18,8 +18,8 @@ namespace Movement
 
         [Header("Grounded/Collision Checks")] 
         public LayerMask GroundLayer;
-        public float GroundDetectionRayLength = 0.02f;
-        public float HeadDetectionRayLength = 0.02f;
+        public float GroundDetectionRayLength = 0.12f;
+        public float HeadDetectionRayLength = 0.10f;
         [Range(0f, 1f)] public float HeadWidth = 0.75f;
 
         [Header("Jump")] 
