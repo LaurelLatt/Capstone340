@@ -8,17 +8,7 @@ namespace ScreenControllers
     {
         public UIScreenManager uiScreenManager;
         [SerializeField] private Text collectedText;
-
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start()
-        {
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
+        
 
         public void ShowPauseMenu()
         {
@@ -44,14 +34,6 @@ namespace ScreenControllers
         {
             collectedText.text = "Collected: " + collected;
         }
-
-        // private bool inCombat;
-        //
-        //
-        // private IEnumerator GenerateHealth()
-        // {
-        //     
-        // }
         
     }
 }

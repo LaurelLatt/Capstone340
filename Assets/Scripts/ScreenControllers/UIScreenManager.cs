@@ -49,7 +49,7 @@ namespace ScreenControllers
         {
             ShowScreen(resultsScreen);
             GameManager.Instance.StopGame();
-            GameManager.Instance.UnloadLevelAsync();
+            // GameManager.Instance.UnloadLevelAsync();
         }
 
         public void ShowPauseScreen()

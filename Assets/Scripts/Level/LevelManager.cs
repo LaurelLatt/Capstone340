@@ -1,14 +1,19 @@
+using System;
 using System.Collections;
+using GravityInverters;
 using UnityEngine;
 
 
 public class LevelManager : MonoBehaviour
 {
+    public static event Action OnCollectibleCollected;
+    public static event Action OnLevelReset;
+    public int goalCollectibles {get; private set;}
+    public int collectedItems {get; private set;}
+    
     private Vector3 playerSpawn;
     private bool hasCollectibles;
-    private int goalCollectibles;
     private LevelSettings levelSettings;
-    private int collectedItems;
     private PlayerController player;
 
     public void ApplySettings(LevelSettings settings)
@@ -101,23 +106,33 @@ public class LevelManager : MonoBehaviour
 
     public void LevelReset()
     {
+        OnLevelReset?.Invoke();
         ResetCollectibles();
-        // Re-enable all collectibles in the level
-        foreach (var collectible in FindObjectsByType<Collectible>(FindObjectsInactive.Include, FindObjectsSortMode.None))
-        {
-            collectible.gameObject.SetActive(true);
-        }
+        ResetGravityInverters();
         
         if (player != null)
         {
             player.RespawnAt(playerSpawn);
         }
     }
-    
-    
+
+    private void ResetGravityInverters()
+    {
+        foreach (var inverter in FindObjectsByType<GravityInverter>(FindObjectsInactive.Include,
+                     FindObjectsSortMode.None))
+        {
+            inverter.gameObject.SetActive(true);
+        }
+    }
 
     private void ResetCollectibles()
     {
+        // Re-enable all collectibles in the level
+        foreach (var collectible in FindObjectsByType<Collectible>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+        {
+            collectible.gameObject.SetActive(true);
+        }
+        
         collectedItems = 0;
         GameManager.Instance.gameScreen.UpdateCollectibleUI(collectedItems);
     }
@@ -127,6 +142,7 @@ public class LevelManager : MonoBehaviour
         if (!hasCollectibles) return;
 
         collectedItems++;
+        OnCollectibleCollected?.Invoke();
         GameManager.Instance.gameScreen.UpdateCollectibleUI(collectedItems);
 
         if (collectedItems >= goalCollectibles && levelSettings.collectiblesAsOnlyWinCondition)
@@ -173,6 +189,7 @@ public class LevelManager : MonoBehaviour
         player.transform.position = Vector3.zero;
         player.ResetMovement();
         ResetCollectibles();
+        ResetGravityInverters();
         hasCollectibles = false;
         GameManager.Instance.gameScreen.HideCollectedText();
         GameManager.Instance.cameraFade.TurnOffFade();

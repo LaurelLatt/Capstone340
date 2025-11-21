@@ -74,6 +74,7 @@ public class GameManager : MonoBehaviour
         if (LevelManager != null)
         {
             LevelManager.LevelReset();
+            Time.timeScale = 1;
         }
         else
         {

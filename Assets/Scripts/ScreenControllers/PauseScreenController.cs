@@ -28,6 +28,12 @@ namespace ScreenControllers
             uiScreenManager.HidePauseScreen();
         }
 
+        public void RestartLevel()
+        {
+            uiScreenManager.ShowGameScreen();
+            GameManager.Instance.LevelReset();
+        }
+
         public void GoToSelectScreen()
         {
             uiScreenManager.ShowSelectScreen();
