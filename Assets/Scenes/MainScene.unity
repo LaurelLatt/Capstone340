@@ -6197,7 +6197,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 43299665556143450, guid: e22d2a7927fe84f7bb766bc4a6846dae, type: 3}
       propertyPath: m_TagString
-      value: Player
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 2088788500881456193, guid: e22d2a7927fe84f7bb766bc4a6846dae, type: 3}
       propertyPath: m_Sprite
@@ -6305,7 +6305,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6150082716194581031, guid: e22d2a7927fe84f7bb766bc4a6846dae, type: 3}
       propertyPath: m_TagString
-      value: Player
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 6154573096377528263, guid: e22d2a7927fe84f7bb766bc4a6846dae, type: 3}
       propertyPath: m_Size.x
@@ -6337,7 +6337,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6483711117328799136, guid: e22d2a7927fe84f7bb766bc4a6846dae, type: 3}
       propertyPath: m_TagString
-      value: Player
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 8805631690557120493, guid: e22d2a7927fe84f7bb766bc4a6846dae, type: 3}
       propertyPath: m_Size.x

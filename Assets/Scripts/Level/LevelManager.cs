@@ -106,7 +106,6 @@ public class LevelManager : MonoBehaviour
 
     public void LevelReset()
     {
-        OnLevelReset?.Invoke();
         ResetCollectibles();
         ResetGravityInverters();
         
@@ -114,6 +113,7 @@ public class LevelManager : MonoBehaviour
         {
             player.RespawnAt(playerSpawn);
         }
+        OnLevelReset?.Invoke();
     }
 
     private void ResetGravityInverters()

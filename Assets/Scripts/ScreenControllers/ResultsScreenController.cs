@@ -29,6 +29,7 @@ namespace ScreenControllers
 
         public void RetryLevel()
         {
+            Time.timeScale = 1f; 
             uiScreenManager.ShowGameScreen();
             GameManager.Instance.LevelReset();
         }

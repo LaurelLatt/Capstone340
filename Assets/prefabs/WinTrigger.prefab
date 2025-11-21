@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WinTrigger
   levelManager: {fileID: 0}
+  triggerCollider: {fileID: 346398540781707367}
 --- !u!61 &346398540781707367
 BoxCollider2D:
   m_ObjectHideFlags: 0
